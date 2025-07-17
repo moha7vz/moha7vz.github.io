@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur d'aides - Moha7vz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2c5aa0;
+        }
+
+        .cta-button {
+            background: #2c5aa0;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background: #1e40af;
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 3rem 0;
+        }
+
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .main-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .main-title h1 {
+            font-size: 2.5rem;
+            color: #2c5aa0;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .main-title p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            right: 25px;
+            height: 3px;
+            background: #e5e7eb;
+            z-index: 1;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            height: 3px;
+            background: #0ad3ef;
+            z-index: 2;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        .step {
+            width: 50px;
+            height: 42px;
+            border-radius: 21px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: #9ca3af;
+            position: relative;
+            z-index: 3;
+            transition: all 0.3s ease;
+        }
+
+        .step.active {
+            background: #2c5aa0;
+            border-color: #2c5aa0;
+            color: white;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
+        }
+
+        .step.completed {
+            background: #0ad3ef;
+            border-color: #0ad3ef;
+            color: white;
+        }
+
+        .question-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .question-section h2 {
+            font-size: 2rem;
+            color: #2c5aa0;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .question-section p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-number {
+            color: #0ad3ef;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .options-grid.cols-2 {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .options-grid.cols-3 {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .options-grid.cols-4 {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+
+        .option {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option:hover {
+            border-color: #2c5aa0;
+            background: rgba(44, 90, 160, 0.02);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(44, 90, 160, 0.15);
+        }
+
+        .option.selected {
+            border-color: #2c5aa0;
+            background: rgba(44, 90, 160, 0.1);
+            color: #2c5aa0;
+            box-shadow: 0 4px 20px rgba(44, 90, 160, 0.2);
+        }
+
+        .option-icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .option-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #374151;
+            margin-bottom: 0.3rem;
+        }
+
+        .option.selected .option-title {
+            color: #2c5aa0;
+        }
+
+        .option-subtitle {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            text-align: left;
+            gap: 1rem;
+            padding: 1.2rem 1.5rem;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #2c5aa0;
+            cursor: pointer;
+        }
+
+        .checkbox-content {
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .input-section {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .input-section.cols-2 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2c5aa0;
+            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 140px;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #6b7280;
+            border: 2px solid #e5e7eb;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .btn-primary {
+            background: #2c5aa0;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #0ad3ef;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #0bb8d4;
+            transform: translateY(-2px);
+        }
+
+        .step-content {
+            display: block;
+        }
+
+        .step-content.hidden {
+            display: none;
+        }
+
+        .results-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .results-card h3 {
+            color: #2c5aa0;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .results-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .results-card li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #0ad3ef;
+        }
+
+        .results-card li strong {
+            color: #2c5aa0;
+        }
+
+        .total-estimate {
+            background: #2c5aa0;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 2rem 0;
+        }
+
+        .disclaimer {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #fbbf24;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .cta-results {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .cta-results .btn {
+            margin: 0.5rem;
+        }
+
+        footer {
+            background: rgba(44, 90, 160, 0.9);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #0ad3ef;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #0ad3ef;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .main-title h1 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 2rem;
+            }
+            
+            .options-grid.cols-3,
+            .options-grid.cols-4 {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                min-width: auto;
+            }
+            
+            .step {
+                width: 40px;
+                height: 34px;
+                font-size: 13px;
+            }
+            
+            .progress-bar::before,
+            .progress-line {
+                left: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 0 15px;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .main-title h1 {
+                font-size: 1.8rem;
+            }
+            
+            .question-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Moha7vz</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="audit.html">Audit Énergétique</a></li>
+                <li><a href="index.html#mar">MAR</a></li>
+                <li><a href="index.html#processus">Notre Processus</a></li>
+                <li><a href="index.html#certification">Certifications</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <a href="tel:0465843080" class="cta-button">Devis Gratuit</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="main-container">
+            <div class="main-title">
+                <h1>Simulateur d'aides à la rénovation</h1>
+                <p>Découvrez en quelques minutes les aides financières disponibles pour vos travaux de rénovation énergétique</p>
+            </div>
+
+            <div class="card">
+                <div class="progress-bar">
+                    <div class="progress-line"></div>
+                    <div class="step active" data-step="1">1</div>
+                    <div class="step" data-step="2">2</div>
+                    <div class="step" data-step="3">3</div>
+                    <div class="step" data-step="4">4</div>
+                    <div class="step" data-step="5">5</div>
+                    <div class="step" data-step="6">6</div>
+                </div>
+
+                <div id="content">
+                    <!-- Étape 1: Statut -->
+                    <div class="step-content" id="step1">
+                        <div class="question-section">
+                            <div class="question-number">Étape 1 sur 6</div>
+                            <h2>Quel est votre statut ?</h2>
+                            <p>Sélectionnez votre situation actuelle vis-à-vis du logement</p>
+                        </div>
+                        <div class="options-grid cols-3">
+                            <div class="option" data-value="proprietaire">
+                                <span class="option-icon">🏡</span>
+                                <div class="option-title">Propriétaire</div>
+                                <div class="option-subtitle">Occupant ou bailleur</div>
+                            </div>
+                            <div class="option" data-value="acquereur">
+                                <span class="option-icon">🔑</span>
+                                <div class="option-title">Futur acquéreur</div>
+                                <div class="option-subtitle">Achat en cours</div>
+                            </div>
+                            <div class="option" data-value="locataire">
+                                <span class="option-icon">👤</span>
+                                <div class="option-title">Locataire</div>
+                                <div class="option-subtitle">Avec accord du propriétaire</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Étape 2 -->
+                    <div class="step-content hidden" id="step2">
+                        <div class="question-section">
+                            <div class="question-number">Étape 2 sur 6</div>
+                            <h2>Caractéristiques de votre logement</h2>
+                            <p>Ces informations nous permettront d'affiner le calcul des aides</p>
+                        </div>
+                        <div class="options-grid cols-2">
+                            <div class="option" data-value="maison">
+                                <span class="option-icon">🏠</span>
+                                <div class="option-title">Maison individuelle</div>
+                                <div class="option-subtitle">Maison, villa, pavillon</div>
+                            </div>
+                            <div class="option" data-value="appartement">
+                                <span class="option-icon">🏢</span>
+                                <div class="option-title">Appartement</div>
+                                <div class="option-subtitle">Logement collectif</div>
+                            </div>
+                        </div>
+                        <div class="input-section cols-2">
+                            <div class="form-group">
+                                <label>Surface habitable (m²)</label>
+                                <input type="number" id="surface" placeholder="Exemple : 100" min="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Année de construction</label>
+                                <input type="number" id="annee" placeholder="Exemple : 1990" min="1900" max="2024">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Étape 3 -->
+                    <div class="step-content hidden" id="step3">
+                        <div class="question-section">
+                            <div class="question-number">Étape 3 sur 6</div>
+                            <h2>Votre situation familiale</h2>
+                            <p>Cette information influence le calcul de certaines aides</p>
+                        </div>
+                        <div class="options-grid cols-3">
+                            <div class="option" data-value="celibataire">
+                                <span class="option-icon">👤</span>
+                                <div class="option-title">Personne seule</div>
+                            </div>
+                            <div class="option" data-value="couple">
+                                <span class="option-icon">👫</span>
+                                <div class="option-title">Couple sans enfant</div>
+                            </div>
+                            <div class="option" data-value="famille">
+                                <span class="option-icon">👪</span>
+                                <div class="option-title">Famille avec enfant(s)</div>
+                            </div>
+                        </div>
+                        <div class="input-section">
+                            <div class="form-group">
+                                <label>Nombre de personnes dans le foyer</label>
+                                <input type="number" id="personnes" placeholder="Exemple : 3" min="1" max="20">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Étape 4 -->
+                    <div class="step-content hidden" id="step4">
+                        <div class="question-section">
+                            <div class="question-number">Étape 4 sur 6</div>
+                            <h2>Performance énergétique actuelle</h2>
+                            <p>Connaissez-vous la classe énergétique de votre logement (DPE) ?</p>
+                        </div>
+                        <div class="options-grid cols-4">
+                            <div class="option" data-value="A">
+                                <span class="option-icon">🟢</span>
+                                <div class="option-title">Classe A</div>
+                                <div class="option-subtitle">≤ 50 kWh/m²</div>
+                            </div>
+                            <div class="option" data-value="B">
+                                <span class="option-icon">🟢</span>
+                                <div class="option-title">Classe B</div>
+                                <div class="option-subtitle">51 à 90 kWh/m²</div>
+                            </div>
+                            <div class="option" data-value="C">
+                                <span class="option-icon">🟡</span>
+                                <div class="option-title">Classe C</div>
+                                <div class="option-subtitle">91 à 150 kWh/m²</div>
+                            </div>
+                            <div class="option" data-value="D">
+                                <span class="option-icon">🟡</span>
+                                <div class="option-title">Classe D</div>
+                                <div class="option-subtitle">151 à 230 kWh/m²</div>
+                            </div>
+                            <div class="option" data-value="E">
+                                <span class="option-icon">🟠</span>
+                                <div class="option-title">Classe E</div>
+                                <div class="option-subtitle">231 à 330 kWh/m²</div>
+                            </div>
+                            <div class="option" data-value="F">
+                                <span class="option-icon">🔴</span>
+                                <div class="option-title">Classe F</div>
+                                <div class="option-subtitle">331 à 450 kWh/m²</div>
+                            </div>
+                            <div class="option" data-value="G">
+                                <span class="option-icon">🔴</span>
+                                <div class="option-title">Classe G</div>
+                                <div class="option-subtitle">> 450 kWh/m²</div>
+                            </div>
+                            <div class="option" data-value="inconnu">
+                                <span class="option-icon">❓</span>
+                                <div class="option-title">Non connu</div>
+                                <div class="option-subtitle">Pas de DPE récent</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Étape 5 -->
+                    <div class="step-content hidden" id="step5">
+                        <div class="question-section">
+                            <div class="question-number">Étape 5 sur 6</div>
+                            <h2>Vos travaux de rénovation</h2>
+                            <p>Sélectionnez les travaux que vous souhaitez réaliser (plusieurs choix possibles)</p>
+                        </div>
+                        <div class="options-grid">
+                            <div class="option checkbox-option">
+                                <input type="checkbox" value="isolation" id="isolation">
+                                <label for="isolation" class="checkbox-content">
+                                    <span class="option-icon">🧱</span>
+                                    <div class="option-title">Isolation thermique</div>
+                                    <div class="option-subtitle">Murs, toiture, sols, combles</div>
+                                </label>
+                            </div>
+                            <div class="option checkbox-option">
+                                <input type="checkbox" value="chauffage" id="chauffage">
+                                <label for="chauffage" class="checkbox-content">
+                                    <span class="option-icon">🔥</span>
+                                    <div class="option-title">Système de chauffage</div>
+                                    <div class="option-subtitle">Pompe à chaleur, chaudière, poêle</div>
+                                </label>
+                            </div>
+                            <div class="option checkbox-option">
+                                <input type="checkbox" value="ventilation" id="ventilation">
+                                <label for="ventilation" class="checkbox-content">
+                                    <span class="option-icon">💨</span>
+                                    <div class="option-title">Ventilation</div>
+                                    <div class="option-subtitle">VMC double flux, VMI</div>
+                                </label>
+                            </div>
+                            <div class="option checkbox-option">
+                                <input type="checkbox" value="fenetres" id="fenetres">
+                                <label for="fenetres" class="checkbox-content">
+                                    <span class="option-icon">🪟</span>
+                                    <div class="option-title">Menuiseries</div>
+                                    <div class="option-subtitle">Fenêtres, portes, volets</div>
+                                </label>
+                            </div>
+                            <div class="option checkbox-option">
+                                <input type="checkbox" value="eau_chaude" id="eau_chaude">
+                                <label for="eau_chaude" class="checkbox-content">
+                                    <span class="option-icon">🚿</span>
+                                    <div class="option-title">Eau chaude sanitaire</div>
+                                    <div class="option-subtitle">Chauffe-eau thermodynamique, solaire</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Étape 6 -->
+                    <div class="step-content hidden" id="step6">
+                        <div class="question-section">
+                            <div class="question-number">Étape 6 sur 6</div>
+                            <h2>Informations complémentaires</h2>
+                            <p>Ces dernières informations nous permettront de personnaliser précisément votre simulation</p>
+                        </div>
+                        <div class="input-section cols-2">
+                            <div class="form-group">
+                                <label>Revenus annuels du foyer (€)</label>
+                                <input type="number" id="revenus" placeholder="Exemple : 45 000" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Code postal du logement</label>
+                                <input type="text" id="codePostal" placeholder="Exemple : 69001" maxlength="5">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Résultats -->
+                    <div class="step-content hidden" id="results">
+                        <div class="question-section">
+                            <h2>Vos aides estimées</h2>
+                            <p>Voici les aides financières auxquelles vous pourriez avoir droit</p>
+                        </div>
+                        <div class="results-card">
+                            <h3>🎉 Félicitations ! Vous êtes éligible à plusieurs aides :</h3>
+                            <ul>
+                                <li><strong>MaPrimeRénov' :</strong> jusqu'à 10 000 €</li>
+                                <li><strong>Éco-prêt à taux zéro :</strong> jusqu'à 30 000 €</li>
+                                <li><strong>Certificats d'Économies d'Énergie (CEE) :</strong> jusqu'à 3 000 €</li>
+                                <li><strong>Aides locales :</strong> jusqu'à 2 000 €</li>
+                                <li><strong>Accompagnement MAR :</strong> Subventionné à 100%</li>
+                            </ul>
+                            <div class="total-estimate">
+                                Total estimé : jusqu'à 45 000 €
+                            </div>
+                            <div class="disclaimer">
+                                <strong>Important :</strong> Ces montants sont indicatifs et peuvent varier selon votre situation précise, les travaux réalisés et les évolutions réglementaires. Pour une estimation personnalisée et précise, nous vous recommandons de faire appel à nos experts.
+                            </div>
+                            <div class="cta-results">
+                                <a href="contact.html" class="btn btn-primary">Demander un devis gratuit</a>
+                                <a href="tel:0465843080" class="btn btn-success">Être rappelé</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="prevBtn" style="display: none;">Précédent</button>
+                    <button class="btn btn-primary" id="nextBtn">Suivant</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Moha7vz</h3>
+                    <p>Votre partenaire de confiance pour une transition énergétique réussie.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>2 rue Coysevox 69001 Lyon</li>
+                        <li><a href="mailto:contact@moha7vz.fr">contact@moha7vz.fr</a></li>
+                        <li><a href="tel:0465843080">04 65 84 30 80</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li>Audit Énergétique</li>
+                        <li>Mon Accompagnateur Rénov'</li>
+                        <li>Conseil en énergie</li>
+                        <li>Rénovation énergétique</li>
+                    </ul>
+                </div>
+            </div>
+            <p>&copy; 2024 Moha7vz. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 6;
+        const formData = {};
+
+        function showStep(stepNumber) {
+            // Masquer toutes les étapes
+            for(let i = 1; i <= totalSteps; i++) {
+                const step = document.getElementById('step' + i);
+                if(step) step.classList.add('hidden');
+            }
+            document.getElementById('results')?.classList.add('hidden');
+            
+            // Afficher l'étape courante
+            if(stepNumber === 'results') {
+                document.getElementById('results').classList.remove('hidden');
+            } else {
+                const currentContent = document.getElementById('step' + stepNumber);
+                if(currentContent) {
+                    currentContent.classList.remove('hidden');
+                }
+            }
+            
+            updateProgress();
+            updateButtons();
+        }
+
+        function updateProgress() {
+            const progressLine = document.querySelector('.progress-line');
+            const steps = document.querySelectorAll('.step');
+            const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            
+            progressLine.style.width = progressPercentage + '%';
+            
+            steps.forEach((step, index) => {
+                const stepNumber = index + 1;
+                step.classList.remove('active', 'completed');
+                
+                if (stepNumber < currentStep) {
+                    step.classList.add('completed');
+                } else if (stepNumber === currentStep) {
+                    step.classList.add('active');
+                }
+            });
+        }
+
+        function updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const navigation = document.querySelector('.navigation');
+            
+            if(currentStep === 'results') {
+                navigation.style.display = 'none';
+                return;
+            }
+            
+            navigation.style.display = 'flex';
+            
+            prevBtn.style.display = currentStep === 1 ? 'none' : 'inline-block';
+            
+            if (currentStep === totalSteps) {
+                nextBtn.textContent = 'Voir les résultats';
+                nextBtn.className = 'btn btn-success';
+            } else {
+                nextBtn.textContent = 'Suivant';
+                nextBtn.className = 'btn btn-primary';
+            }
+        }
+
+        function nextStep() {
+            if (!validateCurrentStep()) return;
+            
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            } else {
+                currentStep = 'results';
+                showStep('results');
+            }
+        }
+
+        function previousStep() {
+            if (currentStep === 'results') {
+                currentStep = totalSteps;
+            } else if (currentStep > 1) {
+                currentStep--;
+            }
+            showStep(currentStep);
+        }
+
+        function validateCurrentStep() {
+            const currentContent = document.getElementById('step' + currentStep);
+            
+            const options = currentContent.querySelectorAll('.option:not(.checkbox-option)');
+            if (options.length > 0) {
+                const selected = currentContent.querySelector('.option.selected');
+                if (!selected) {
+                    alert('Veuillez sélectionner une option');
+                    return false;
+                }
+            }
+            
+            if (currentStep === 5) {
+                const checkboxes = currentContent.querySelectorAll('input[type="checkbox"]:checked');
+                if (checkboxes.length === 0) {
+                    alert('Veuillez sélectionner au moins un type de travaux');
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        // Gestion des clics sur les options
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.option:not(.checkbox-option)')) {
+                const option = e.target.closest('.option');
+                const parent = option.parentElement;
+                
+                parent.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+            }
+        });
+
+        // Gestion des boutons
+        document.getElementById('nextBtn').addEventListener('click', nextStep);
+        document.getElementById('prevBtn').addEventListener('click', previousStep);
+
+        // Initialisation
+        showStep(1);
+    </script>
+</body>
+</html>

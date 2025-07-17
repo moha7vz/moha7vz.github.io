@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Moha7vz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2c5aa0;
+        }
+
+        .cta-button {
+            background: #2c5aa0;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background: #1e40af;
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 3rem 0;
+        }
+
+        .contact-hero {
+            text-align: center;
+            padding: 4rem 0;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e40af 100%);
+            color: white;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .contact-hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .contact-form {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form h2 {
+            color: #2c5aa0;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2c5aa0;
+            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: #2c5aa0;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .contact-info {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info h2 {
+            color: #2c5aa0;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #2c5aa0;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            background: #e8f4f8;
+            transform: translateX(5px);
+        }
+
+        .info-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: #2c5aa0;
+            margin-top: 0.25rem;
+        }
+
+        .info-content h3 {
+            color: #1f2937;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-content p {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .hours-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .hours-section h3 {
+            color: #2c5aa0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hours-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .hours-item:last-child {
+            border-bottom: none;
+        }
+
+        .hours-item .day {
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .hours-item .time {
+            color: #6b7280;
+        }
+
+        .map-section {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .map-section h2 {
+            color: #2c5aa0;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .map-section p {
+            color: #6b7280;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .map-placeholder {
+            background: #f8f9fa;
+            height: 300px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #6b7280;
+            border: 2px dashed #d1d5db;
+        }
+
+        .emergency-card {
+            background: #0ad3ef;
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: 0 4px 20px rgba(10, 211, 239, 0.3);
+        }
+
+        .emergency-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .emergency-card p {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .emergency-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid white;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .emergency-btn:hover {
+            background: white;
+            color: #0ad3ef;
+        }
+
+        .success-message {
+            background: #10b981;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            background: rgba(44, 90, 160, 0.9);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #0ad3ef;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #0ad3ef;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form,
+            .contact-info,
+            .map-section {
+                padding: 2rem;
+            }
+            
+            .contact-form h2,
+            .contact-info h2,
+            .map-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .info-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .info-item:hover {
+                transform: none;
+            }
+            
+            .info-icon {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-hero {
+                padding: 2rem 0;
+            }
+            
+            .contact-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .contact-form,
+            .contact-info,
+            .map-section {
+                padding: 1.5rem;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 0.8rem;
+            }
+            
+            .submit-btn {
+                padding: 0.8rem 1.5rem;
+            }
+            
+            .map-placeholder {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Moha7vz</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="audit.html">Audit Énergétique</a></li>
+                <li><a href="index.html#mar">MAR</a></li>
+                <li><a href="index.html#processus">Notre Processus</a></li>
+                <li><a href="index.html#certification">Certifications</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <a href="tel:0465843080" class="cta-button">Devis Gratuit</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="contact-hero fade-in">
+            <div class="contact-hero-content">
+                <h1>Contactez nos experts</h1>
+                <p>Prêt à commencer votre transition énergétique ? Notre équipe vous accompagne dans la réalisation de vos projets de rénovation énergétique.</p>
+            </div>
+        </section>
+
+        <div class="contact-grid">
+            <div class="contact-form fade-in">
+                <h2>Demande de devis gratuit</h2>
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstname">Prénom *</label>
+                            <input type="text" id="firstname" name="firstname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Nom *</label>
+                            <input type="text" id="lastname" name="lastname" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-type">Type de client *</label>
+                        <select id="client-type" name="client-type" required>
+                            <option value="">Sélectionnez votre profil</option>
+                            <option value="particulier">Particulier</option>
+                            <option value="professionnel">Professionnel</option>
+                            <option value="collectivite">Collectivité</option>
+                            <option value="syndic">Syndic de copropriété</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service">Service souhaité *</label>
+                        <select id="service" name="service" required>
+                            <option value="">Choisissez un service</option>
+                            <option value="audit">Audit énergétique</option>
+                            <option value="diagnostic">Diagnostic DPE</option>
+                            <option value="accompagnement">Accompagnement travaux</option>
+                            <option value="financement">Aide au financement</option>
+                            <option value="renovation">Rénovation globale</option>
+                            <option value="mar">Mon Accompagnateur Rénov' (MAR)</option>
+                            <option value="autre">Autre demande</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Décrivez votre projet *</label>
+                        <textarea id="message" name="message" placeholder="Parlez-nous de votre projet : type de logement, travaux envisagés, objectifs énergétiques, budget approximatif..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Envoyer ma demande
+                    </button>
+
+                    <div class="success-message" id="successMessage">
+                        ✅ Votre demande a été envoyée avec succès ! Nous vous recontacterons sous 24h.
+                    </div>
+                </form>
+            </div>
+
+            <div class="contact-info fade-in">
+                <h2>Nos coordonnées</h2>
+
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div class="info-content">
+                        <h3>Adresse</h3>
+                        <p>2 rue Coysevox<br>69001 Lyon, France</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <div class="info-content">
+                        <h3>Téléphone</h3>
+                        <p>04 65 84 30 80<br>Du lundi au vendredi</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">✉️</div>
+                    <div class="info-content">
+                        <h3>Email</h3>
+                        <p>contact@moha7vz.fr<br>Réponse sous 24h</p>
+                    </div>
+                </div>
+
+                <div class="hours-section">
+                    <h3>Horaires d'ouverture</h3>
+                    <div class="hours-item">
+                        <span class="day">Lundi - Vendredi</span>
+                        <span class="time">9h00 - 18h00</span>
+                    </div>
+                    <div class="hours-item">
+                        <span class="day">Samedi</span>
+                        <span class="time">9h00 - 12h00</span>
+                    </div>
+                    <div class="hours-item">
+                        <span class="day">Dimanche</span>
+                        <span class="time">Fermé</span>
+                    </div>
+                </div>
+
+                <div class="emergency-card">
+                    <h3>Urgence énergétique ?</h3>
+                    <p>Pour toute demande urgente concernant vos équipements énergétiques</p>
+                    <a href="tel:0465843080" class="emergency-btn">
+                        Appeler maintenant
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-section fade-in">
+            <h2>Nous localiser</h2>
+            <p>Retrouvez notre bureau d'études au cœur de Lyon</p>
+            <div class="map-placeholder">
+                📍 2 rue Coysevox, 69001 Lyon
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Moha7vz</h3>
+                    <p>Votre partenaire de confiance pour une transition énergétique réussie.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>2 rue Coysevox 69001 Lyon</li>
+                        <li><a href="mailto:contact@moha7vz.fr">contact@moha7vz.fr</a></li>
+                        <li><a href="tel:0465843080">04 65 84 30 80</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li>Audit Énergétique</li>
+                        <li>Mon Accompagnateur Rénov'</li>
+                        <li>Conseil en énergie</li>
+                        <li>Rénovation énergétique</li>
+                    </ul>
+                </div>
+            </div>
+            <p>&copy; 2024 Moha7vz. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Gestion du formulaire
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            // Animation du bouton
+            submitBtn.textContent = 'Envoi en cours...';
+            submitBtn.disabled = true;
+            
+            // Simulation d'envoi
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Afficher le message de succès
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // Réinitialiser le formulaire
+                this.reset();
+                
+                // Masquer le message après 5 secondes
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 5000);
+            }, 2000);
+        });
+
+        // Animation des champs au focus
+        document.querySelectorAll('input, select, textarea').forEach(field => {
+            field.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+                this.parentElement.style.transition = 'transform 0.3s ease';
+            });
+            
+            field.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+
+        // Animation d'apparition au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Appliquer l'animation aux éléments
+        document.querySelectorAll('.fade-in').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(element);
+        });
+
+        // Effet de hover sur les cartes d'info
+        document.querySelectorAll('.info-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#e8f4f8';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '#f8f9fa';
+            });
+        });
+
+        // Scroll lisse pour les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

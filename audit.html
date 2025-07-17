@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Énergétique - Moha7vz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2c5aa0;
+        }
+
+        .cta-button {
+            background: #2c5aa0;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background: #1e40af;
+        }
+
+        main {
+            margin-top: 80px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e40af 100%);
+            color: white;
+            text-align: center;
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero p {
+            color: #0ad3ef;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .key-points {
+            background: #f8f9fa;
+            padding: 4rem 0;
+        }
+
+        .key-points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .key-point {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .key-point-icon {
+            width: 24px;
+            height: 24px;
+            background: #0ad3ef;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .key-point-content h4 {
+            color: #2c5aa0;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .key-point-content p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .content-section.alt {
+            background: #f8f9fa;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .content-text h2 {
+            font-size: 2rem;
+            color: #2c5aa0;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .content-text .subtitle {
+            color: #0ad3ef;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .content-text p {
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .feature-image {
+            background: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .feature-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .btn-primary {
+            background: #2c5aa0;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: #1e40af;
+        }
+
+        .steps-section {
+            padding: 4rem 0;
+            background: #f8f9fa;
+        }
+
+        .steps-section h2 {
+            text-align: center;
+            color: #2c5aa0;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+        }
+
+        .tabs-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-button {
+            background: white;
+            border: 2px solid #e5e7eb;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .tab-button.active {
+            border-color: #2c5aa0;
+            background: #2c5aa0;
+            color: white;
+        }
+
+        .tab-button:hover {
+            border-color: #2c5aa0;
+        }
+
+        .tab-button .step-number {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e5e7eb;
+            color: #666;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-left: auto;
+            margin-right: auto;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active .step-number {
+            background: white;
+            color: #2c5aa0;
+        }
+
+        .tab-button span {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .tab-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .tab-content h3 {
+            color: #2c5aa0;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .tab-content p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .video-section {
+            padding: 4rem 0;
+        }
+
+        .video-section h2 {
+            text-align: center;
+            color: #2c5aa0;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .video-section .subtitle {
+            text-align: center;
+            color: #0ad3ef;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .detailed-process {
+            background: #f8f9fa;
+            padding: 4rem 0;
+        }
+
+        .detailed-process .subtitle {
+            color: #0ad3ef;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .detailed-process h2 {
+            color: #2c5aa0;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .detailed-process .process-step {
+            margin-bottom: 2rem;
+        }
+
+        .detailed-process .step-title {
+            color: #2c5aa0;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .detailed-process p {
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .audit-types {
+            padding: 4rem 0;
+        }
+
+        .audit-type {
+            margin-bottom: 4rem;
+        }
+
+        .audit-type h2 {
+            text-align: center;
+            color: #2c5aa0;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .feature-item .icon {
+            width: 24px;
+            height: 24px;
+            background: #0ad3ef;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .feature-item p {
+            color: #555;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .cta-center {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        footer {
+            background: rgba(44, 90, 160, 0.9);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #0ad3ef;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #0ad3ef;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .key-points-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-button {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Moha7vz</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="audit.html" class="active">Audit Énergétique</a></li>
+                <li><a href="index.html#mar">MAR</a></li>
+                <li><a href="index.html#processus">Notre Processus</a></li>
+                <li><a href="index.html#certification">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="tel:0465843080" class="cta-button">Devis Gratuit</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <p>BUREAU D'ÉTUDES ET DE CONSEIL</p>
+                    <h1>Audit énergétique</h1>
+                </div>
+            </div>
+        </section>
+
+        <section class="key-points">
+            <div class="container">
+                <div class="key-points-grid">
+                    <div class="key-point">
+                        <div class="key-point-icon">✓</div>
+                        <div class="key-point-content">
+                            <h4>Le bilan</h4>
+                            <p>Le bilan vous fournit une vision précise de votre consommation énergétique actuelle et des opportunités d'amélioration.</p>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <div class="key-point-icon">✓</div>
+                        <div class="key-point-content">
+                            <h4>La simulation</h4>
+                            <p>La simulation offre une estimation précise des résultats attendus en efficacité énergétique.</p>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <div class="key-point-icon">✓</div>
+                        <div class="key-point-content">
+                            <h4>Le rapport d'audit</h4>
+                            <p>Le rapport d'audit résume les résultats de l'audit énergétique et propose des actions d'amélioration.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="content-grid">
+                    <div class="feature-image">
+                        <img src="img/Label-energie-678x381.jpg" alt="Audit énergétique">
+                    </div>
+                    <div class="content-text">
+                        <p class="subtitle">Comprendre</p>
+                        <h2>Un audit énergétique</h2>
+                        <p>Un audit énergétique est une évaluation détaillée de la consommation d'énergie d'un bâtiment permettant d'identifier les sources de gaspillage d'énergie et de proposer des solutions personnalisées pour améliorer l'efficacité énergétique.</p>
+                        <p>L'objectif d'un audit énergétique est de réduire les coûts énergétiques, d'optimiser l'utilisation des ressources et de diminuer l'impact environnemental de votre bâtiment.</p>
+                        <a href="tel:0465843080" class="btn-primary">Demander un audit énergétique</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="steps-section">
+            <div class="container">
+                <h2>Les étapes d'un audit énergétique</h2>
+                <div class="tabs-container">
+                    <div class="tab-buttons">
+                        <div class="tab-button active" onclick="showTab(1)">
+                            <div class="step-number">1</div>
+                            <span>Faire une visite du logement</span>
+                        </div>
+                        <div class="tab-button" onclick="showTab(2)">
+                            <div class="step-number">2</div>
+                            <span>Modélisation de la consommation</span>
+                        </div>
+                        <div class="tab-button" onclick="showTab(3)">
+                            <div class="step-number">3</div>
+                            <span>Scénario de rénovation énergétique</span>
+                        </div>
+                        <div class="tab-button" onclick="showTab(4)">
+                            <div class="step-number">4</div>
+                            <span>Estimation financière des travaux</span>
+                        </div>
+                        <div class="tab-button" onclick="showTab(5)">
+                            <div class="step-number">5</div>
+                            <span>Rédaction et restitution du rapport</span>
+                        </div>
+                    </div>
+                    
+                    <div id="tab-content-1" class="tab-content">
+                        <h3>Faire une visite du logement</h3>
+                        <p>Nous profitons de cette visite pour clarifier le plan de la maison, pour identifier le modèle constructif et les matériaux utilisés et réaliser un premier relevé thermique des ouvertures (portes et fenêtres). Différents documents sont demandés, tels que les factures d'énergie consommée de l'année passée, le permis de construire, le plan ou, à défaut, un croquis du bien immobilier.</p>
+                    </div>
+                    
+                    <div id="tab-content-2" class="tab-content" style="display: none;">
+                        <h3>Modélisation de la consommation</h3>
+                        <p>Nous réalisons une modélisation de la consommation actuelle du bâti, en tenant compte des dépenses en chauffage, ventilation et eau chaude sanitaire. Cette étape permet d'estimer les déperditions thermiques globales de votre construction.</p>
+                    </div>
+                    
+                    <div id="tab-content-3" class="tab-content" style="display: none;">
+                        <h3>Scénario de rénovation énergétique</h3>
+                        <p>Cette étape conséquente réunit l'ensemble des préconisations d'amélioration du bâti et de ses équipements, avec l'objectif d'obtenir un rendement basse – voire très basse – consommation. Les recommandations permettent d'évaluer l'intérêt de différents modes de chauffage et la possibilité d'intégrer des systèmes à énergies renouvelables. Pour chaque étape des travaux conseillés, un calcul du gain est signifié dans le rapport d'audit.</p>
+                    </div>
+                    
+                    <div id="tab-content-4" class="tab-content" style="display: none;">
+                        <h3>Estimation financière des travaux</h3>
+                        <p>L'audit énergétique prévoit une évaluation du coût de chaque amélioration proposée. Ces montants sont donnés à titre indicatif et ne se substituent pas aux devis des prestataires en bâtiment.</p>
+                    </div>
+                    
+                    <div id="tab-content-5" class="tab-content" style="display: none;">
+                        <h3>Rédaction et restitution du rapport</h3>
+                        <p>En plus de tous les aspects techniques et financiers évoqués, le rapport d'audit inclut une synthèse des dispositifs d'aides existants auxquels le commanditaire peut prétendre.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="video-section">
+            <div class="container">
+                <p class="subtitle">Comprendre</p>
+                <h2>L'intérêt d'un audit énergétique</h2>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ldHmoP1F2O8" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="detailed-process content-section alt">
+            <div class="container">
+                <div class="content-grid">
+                    <div class="content-text">
+                        <p class="subtitle">Moha7vz réalise votre</p>
+                        <h2>AUDIT ÉNERGÉTIQUE</h2>
+                        <p>Un audit énergétique consiste en une évaluation approfondie destinée à examiner la consommation d'énergie d'un bâtiment, d'une installation ou d'un procédé. Voici les différentes étapes du processus :</p>
+                        
+                        <div class="process-step">
+                            <div class="step-title">1. Phase préparatoire et collecte des informations</div>
+                            <p>L'audit débute par la préparation. L'auditeur réunit des données telles que les plans des lieux, les factures d'énergie, les contrats de fourniture et les équipements en place. Cette phase permet de cerner les habitudes de consommation et de fixer les limites de l'audit.</p>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-title">2. Visite sur place</div>
+                            <p>Une fois les informations collectées, l'auditeur se rend sur site pour examiner les installations. Il vérifie le bon fonctionnement des équipements (chauffage, ventilation, éclairage, refroidissement, etc.) et observe les pratiques courantes. Il peut aussi interroger le personnel pour mieux comprendre les comportements influant sur la consommation énergétique.</p>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-title">3. Étude des données</div>
+                            <p>Les informations recueillies sont ensuite examinées en détail. L'auditeur repère les points de consommation énergétique élevés et les potentiels dysfonctionnements. Il peut utiliser des outils logiciels pour simuler la consommation et comparer les résultats aux normes ou standards en vigueur.</p>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-title">4. Propositions d'améliorations</div>
+                            <p>Sur la base de cette analyse, l'auditeur recommande des actions pour optimiser l'efficacité énergétique. Cela peut aller de simples changements, comme le remplacement des ampoules par des LED, à des solutions plus complexes, telles que l'isolation des bâtiments ou l'installation de systèmes énergétiques plus performants.</p>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-title">5. Rapport final</div>
+                            <p>Un rapport complet est ensuite élaboré, présentant les résultats de l'étude ainsi que les recommandations. Il inclut souvent une analyse de rentabilité pour aider à prioriser les investissements selon les gains énergétiques et financiers.</p>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-title">6. Suivi et mise en œuvre</div>
+                            <p>Si les recommandations sont adoptées, l'auditeur peut accompagner leur mise en place. Cela comprend la supervision des travaux, la vérification des performances des actions entreprises, et la réévaluation continue pour s'assurer que les économies d'énergie prévues sont bien réalisées.</p>
+                        </div>
+                        
+                        <p>Ainsi, un audit énergétique permet d'optimiser la gestion énergétique, tout en réduisant l'impact environnemental et en générant des économies significatives.</p>
+                    </div>
+                    <div class="feature-image">
+                        <img src="img/Diagnostic-Icon-Graphics-13337462-1.jpg" alt="Expert en audit énergétique">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="audit-types">
+            <div class="container">
+                <div class="audit-type">
+                    <h2>Audit réglementaire pour particuliers</h2>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="icon">✓</div>
+                            <p>Notre équipe d'experts effectue une visite minutieuse et détaillée de votre bien afin d'analyser en profondeur ses caractéristiques énergétiques.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="icon">✓</div>
+                            <p>Nous procédons à une étude approfondie de votre bien, un diagnostic immobilier et établissons un rapport détaillé qui met en lumière les résultats de notre analyse énergétique.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="icon">✓</div>
+                            <p>Nous identifions différents scénarios possibles de travaux, en prenant en compte vos besoins et objectifs spécifiques, afin de vous proposer des solutions adaptées à votre situation.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="icon">✓</div>
+                            <p>Une fois les différentes étapes de l'audit énergétique réalisées, nous procédons à l'établissement d'un rapport détaillé. Ce rapport récapitule toutes les informations recueillies, les résultats de l'analyse, les recommandations de travaux et les différents scénarios d'amélioration envisagés. Il vous est ensuite remis, vous fournissant ainsi une vision claire et complète des actions à entreprendre pour optimiser l'efficacité énergétique de votre habitation.</p>
+                        </div>
+                    </div>
+                    <div class="cta-center">
+                        <a href="tel:0465843080" class="btn-primary">Demander un audit énergétique</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section alt">
+            <div class="container">
+                <div class="content-grid">
+                    <div class="content-text">
+                        <p class="subtitle">Moha7vz réalise votre</p>
+                        <h2>Audit incitatif</h2>
+                        <p>L'audit incitatif est une opportunité unique pour les propriétaires, souhaitant améliorer l'efficacité énergétique de leur habitation.</p>
+                        <p>En réalisant un audit énergétique via un bureau d'étude qualifié, vous pouvez bénéficier d'une prime d'incitation à la rénovation énergétique accordée par l'État.</p>
+                        <p>Notre équipe est prête à réaliser un bilan thermique de votre logement. Cette prime, calculée en fonction de vos revenus et de votre avis d'imposition, contribue à réduire le coût de l'audit.</p>
+                        <p>Elle vise à encourager les propriétaires à entreprendre des travaux de rénovation énergétique en offrant un soutien financier significatif.</p>
+                    </div>
+                    <div class="feature-image">
+                        <img src="img/000110976_600x400_c.jpg" alt="Audit incitatif">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="audit-types">
+            <div class="container">
+                <div class="audit-type">
+                    <h2>Audit incitatif pour particuliers</h2>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="icon">✓</div>
+                            <p>Notre équipe d'experts effectue une visite minutieuse et détaillée de votre bien afin d'analyser en profondeur ses caractéristiques énergétiques.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="icon">✓</div>
+                            <p>Nous procédons à une étude approfondie de votre bien et établissons un rapport détaillé qui met en lumière les résultats de notre analyse énergétique.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="icon">✓</div>
+                            <p>Nous identifions différents scénarios possibles de travaux, en prenant en compte vos besoins et objectifs spécifiques, afin de vous proposer des solutions adaptées à votre situation.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="icon">✓</div>
+                            <p>Une fois les différentes étapes de l'audit énergétique réalisées, nous procédons à l'établissement d'un rapport détaillé. Ce rapport récapitule toutes les informations recueillies, les résultats de l'analyse, les recommandations de travaux et les différents scénarios d'amélioration envisagés. Il vous est ensuite remis, vous fournissant ainsi une vision claire et complète des actions à entreprendre pour optimiser l'efficacité énergétique de votre habitation.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="icon">✓</div>
+                            <p>Notre approche d'audit incitatif se distingue par notre engagement à rester en totale cohérence avec nos clients. Nous prenons en compte leurs besoins spécifiques ainsi que les capacités de leur maison pour envisager les travaux les plus appropriés. Notre objectif est de fournir des recommandations personnalisées et réalistes, garantissant ainsi une démarche énergétique efficace et adaptée à chaque situation.</p>
+                        </div>
+                    </div>
+                    <div class="cta-center">
+                        <a href="tel:0465843080" class="btn-primary">Demander un audit énergétique</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Moha7vz</h3>
+                    <p>Votre partenaire de confiance pour une transition énergétique réussie.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>2 rue Coysevox 69001 Lyon</li>
+                        <li><a href="mailto:contact@moha7vz.fr">contact@moha7vz.fr</a></li>
+                        <li><a href="tel:0465843080">04 65 84 30 80</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li>Audit Énergétique</li>
+                        <li>Mon Accompagnateur Rénov'</li>
+                        <li>Conseil en énergie</li>
+                        <li>Rénovation énergétique</li>
+                    </ul>
+                </div>
+            </div>
+            <p>&copy; 2024 Moha7vz. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showTab(tabNumber) {
+            // Hide all tab contents
+            for (let i = 1; i <= 5; i++) {
+                const content = document.getElementById(`tab-content-${i}`);
+                if (content) {
+                    content.style.display = 'none';
+                }
+            }
+            
+            // Remove active class from all tab buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            const selectedContent = document.getElementById(`tab-content-${tabNumber}`);
+            if (selectedContent) {
+                selectedContent.style.display = 'block';
+            }
+            
+            // Add active class to selected button
+            const selectedButton = buttons[tabNumber - 1];
+            if (selectedButton) {
+                selectedButton.classList.add('active');
+            }
+        }
+
+        // Animation simple des éléments au scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Appliquer l'animation aux éléments
+        document.querySelectorAll('.key-point, .feature-item, .tab-content').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>

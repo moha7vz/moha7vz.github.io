@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moha7vz - Accompagnement Transition Énergétique</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2c5aa0;
+        }
+
+        .cta-button {
+            background: #2c5aa0;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #1e40af;
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 3rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2c5aa0;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .content-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin: 4rem 0;
+            padding: 3rem 0;
+        }
+
+        .content-text {
+            padding: 1rem;
+        }
+
+        .content-text h2 {
+            font-size: 2rem;
+            color: #2c5aa0;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .content-text p {
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .feature-image {
+            background: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 3rem;
+            overflow: hidden;
+        }
+
+        .feature-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .service-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: #2c5aa0;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2c5aa0;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .service-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .service-card h3 {
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .service-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .btn-primary {
+            background: #2c5aa0;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #2c5aa0;
+            padding: 1rem 2rem;
+            border: 1px solid #2c5aa0;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: #1e40af;
+        }
+
+        .btn-secondary:hover {
+            background: #2c5aa0;
+            color: white;
+        }
+
+        .mar-section {
+            background: #f8f9fa;
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+
+        .mar-section h2 {
+            text-align: center;
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .mar-section .subtitle {
+            text-align: center;
+            color: #0ad3ef;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        .mar-section p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .benefit-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .benefit-item h4 {
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-item p {
+            color: #555;
+            text-align: left;
+        }
+
+        .process-section {
+            margin: 4rem 0;
+            padding: 3rem 0;
+        }
+
+        .process-section h2 {
+            text-align: center;
+            color: #2c5aa0;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .process-step {
+            background: #f8f9fa;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #0ad3ef;
+        }
+
+        .process-step h3 {
+            color: #0ad3ef;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .process-step h4 {
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+        }
+
+        .process-step ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .process-step li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .process-step li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #0ad3ef;
+            font-weight: bold;
+        }
+
+        .testimonials {
+            background: #f8f9fa;
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            color: #2c5aa0;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-item p {
+            color: #555;
+            font-style: italic;
+        }
+
+        .certifications {
+            background: #f8f9fa;
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .certifications h2 {
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .certifications p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .cert-slider {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 8px;
+            background: white;
+            padding: 2rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .cert-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 2rem;
+        }
+
+        .cert-slide {
+            min-width: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cert-logo {
+            width: 90px;
+            height: 60px;
+            margin-bottom: 0.8rem;
+            background: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            object-fit: contain;
+            padding: 0.4rem;
+        }
+
+        .cert-logo img, img.cert-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .cert-slide h4 {
+            color: #333;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .cert-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .cert-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cert-dot.active {
+            background: #2c5aa0;
+        }
+
+        .cert-status {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        footer {
+            background: rgba(44, 90, 160, 0.9);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #0ad3ef;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #0ad3ef;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .content-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Moha7vz</a>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#mar">MAR</a></li>
+                <li><a href="#processus">Notre Processus</a></li>
+                <li><a href="#certification">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="cta-button">Demander un devis</button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>UN PARTENAIRE UNIQUE POUR VOTRE PROJET DE RÉNOVATION !</h1>
+            <p>Avec l'accompagnement de Moha7vz, nous vous accompagnons vers des solutions d'efficacité énergétique et une transition énergétique réussie.</p>
+            <div class="action-buttons">
+                <a href="#" class="btn-primary">CONTACTEZ NOUS</a>
+                <a href="tel:0465843080" class="btn-secondary">APPELEZ</a>
+            </div>
+        </section>
+
+        <section class="services" id="services">
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="img/informationmain-about-page-left-sec-img.png" alt="Audit Énergétique">
+                </div>
+                <h3>Audit Énergétique</h3>
+                <p>Analyse complète de votre consommation énergétique et identification des axes d'amélioration</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="img/Diagnostic-Icon-Graphics-13337462-1.jpg" alt="Diagnostic Performance">
+                </div>
+                <h3>Diagnostic Performance</h3>
+                <p>Évaluation précise de la performance énergétique de vos bâtiments et équipements</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="img/497822.png" alt="Accompagnement Travaux">
+                </div>
+                <h3>Accompagnement Travaux</h3>
+                <p>Suivi personnalisé de vos projets de rénovation énergétique du début à la fin</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="img/4541461.png" alt="Optimisation Financière">
+                </div>
+                <h3>Optimisation Financière</h3>
+                <p>Maximisation des aides et subventions disponibles pour vos projets énergétiques</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="content-text">
+                <h2>Moha7vz, ACTEUR DE LA TRANSITION ÉNERGÉTIQUE</h2>
+                <p><strong>Expert en ingénierie et Bureau d'Étude Technique</strong>, nous sommes spécialisés dans l'accompagnement de la transition énergétique.</p>
+                <p>Face au durcissement de la réglementation, nos prestations permettent aux particuliers comme aux professionnels de se conformer aux obligations et d'accéder aux aides disponibles.</p>
+                <p>Nos diagnostics permettent d'identifier les risques et de proposer des solutions adaptées pour optimiser les décisions énergétiques.</p>
+            </div>
+            <div class="feature-image">
+                <img src="img/2136441-batiment-architecture-construction-paysage-urbain-skyline-entreprise-illustration-vectoriel.jpg" alt="Bâtiment d'entreprise">
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="feature-image">
+                <img src="img/Label-energie-678x381.jpg" alt="Audit énergétique">
+            </div>
+            <div class="content-text">
+                <h2>Audit énergétique</h2>
+                <p>Un audit énergétique est une évaluation détaillée de la consommation d'énergie d'un bâtiment permettant d'identifier les sources de gaspillage d'énergie et de proposer des solutions personnalisées pour améliorer l'efficacité énergétique.</p>
+                <p>L'objectif d'un audit énergétique est de réduire les coûts énergétiques, d'optimiser l'utilisation des ressources et de diminuer l'impact environnemental de votre bâtiment.</p>
+                <div class="action-buttons">
+                    <a href="#" class="btn-primary">Demander un audit énergétique</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="mar" class="mar-section">
+            <div class="container">
+                <p class="subtitle">Notre prestation</p>
+                <h2>Mon Accompagnateur Rénov' (MAR')</h2>
+                <p>Vous envisagez de réaliser des travaux de rénovation d'envergure et de bénéficier des aides de l'État ? Nous sommes agréés Mon Accompagnateur Rénov' (MAR')</p>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <h4>Tiers de confiance agréé par l'État</h4>
+                        <p>En tant que tiers de confiance agréé par l'État, nous vous offrons un service fiable et professionnel pour vous accompagner dans votre projet de rénovation.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Accompagnement personnalisé pour bénéficier de Ma Prime Rénov' Parcours Accompagné</h4>
+                        <p>Nous vous proposons un accompagnement personnalisé pour accéder à Ma Prime Rénov' Parcours Accompagné. Notre objectif est de simplifier vos démarches et de maximiser vos aides financières.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Aide pour définir votre projet et se prémunir contre la fraude potentielle</h4>
+                        <p>Notre équipe vous assiste dans la définition précise de votre projet de rénovation. Nous veillons également à vous protéger contre les risques de fraude, en vous guidant à chaque étape et en vous fournissant des conseils avisés.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="content-text">
+                <h2>Pourquoi avoir recours à Mon Accompagnateur Rénov' ?</h2>
+                <p>Pour bénéficier de l'aide Ma Prime Rénov' Parcours Accompagné de l'ANAH (Agence Nationale de l'Habitat), il est obligatoire de faire appel à une société agréée Mon Accompagnateur Rénov' (MAR').</p>
+                <p>Le MAR est le tiers de confiance qui vous accompagne tout au long de votre projet, vous aide à définir le plan de travaux adapté à votre maison et à obtenir vos aides financières. Il est un allié contre les fraudes potentielles, très fréquentes sur le marché de la rénovation énergétique.</p>
+            </div>
+            <div class="feature-image">
+                <img src="img/Rénovation-Maison-de-ville-Illkirch-Graffenstaden-min-1080x675.jpg" alt="Maison en rénovation">
+            </div>
+        </section>
+
+        <section class="benefits-grid">
+            <div class="benefit-item">
+                <h4>Tiers de confiance</h4>
+                <p>Le MAR est agréé par l'État, garantissant un accompagnement sécurisé et conforme aux exigences légales.</p>
+            </div>
+            <div class="benefit-item">
+                <h4>Définition du plan de travaux</h4>
+                <p>Nous vous aidons à élaborer un plan de rénovation adapté à votre maison, optimisant ainsi l'efficacité énergétique et les coûts.</p>
+            </div>
+            <div class="benefit-item">
+                <h4>Obtention des aides financières</h4>
+                <p>Nous vous guidons pour maximiser les aides financières disponibles, notamment Ma Prime Rénov'.</p>
+            </div>
+            <div class="benefit-item">
+                <h4>Protection contre la fraude</h4>
+                <p>Nous veillons à vous protéger contre les fraudes potentielles sur le marché de la rénovation énergétique.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="feature-image">
+                <img src="img/certification-qualite.jpg" alt="Certification qualité">
+            </div>
+            <div class="content-text">
+                <h2>Pourquoi choisir Moha7vz ?</h2>
+                <p><strong>Certification RGE :</strong> Notre certification RGE (Reconnu Garant de l'Environnement) atteste de notre expertise en matière d'audits énergétiques.</p>
+                <p><strong>Expérience éprouvée :</strong> Nous avons une longue expérience dans l'accompagnement de projets de rénovation, assurant un suivi personnalisé et efficace.</p>
+                <p>Faites appel à Moha7vz pour un accompagnement de qualité et sécurisé dans tous vos projets de rénovation énergétique !</p>
+            </div>
+        </section>
+
+        <section id="processus" class="process-section">
+            <h2>NOTRE ACCOMPAGNEMENT</h2>
+            
+            <div class="process-step">
+                <h3>1ère étape : Visite sur site, audit énergétique et plan de financement</h3>
+                <h4>Diagnostic thermique approfondi :</h4>
+                <ul>
+                    <li>Visite du logement : Nous visitons votre logement pour effectuer un diagnostic thermique complet.</li>
+                    <li>Audit énergétique : Analyse de l'isolation, du système de chauffage, des points de déperdition et de la ventilation.</li>
+                    <li>Échange sur le projet : Discussion détaillée sur votre projet de travaux.</li>
+                </ul>
+                <h4>Rapport et plan de financement :</h4>
+                <ul>
+                    <li>Rapport d'audit énergétique : Nous vous envoyons un rapport réglementaire détaillé.</li>
+                    <li>Scénarios de travaux : Proposition de plusieurs scénarios de travaux adaptés à votre logement, tenant compte de sa configuration et de vos préférences.</li>
+                    <li>Plan de financement estimatif : Estimation des coûts et des aides financières potentielles.</li>
+                </ul>
+                <h4>Sélection des entreprises :</h4>
+                <ul>
+                    <li>Devis d'entreprises RGE : Vous pouvez solliciter des entreprises agréées RGE pour obtenir des devis correspondant au scénario choisi.</li>
+                </ul>
+            </div>
+
+            <div class="process-step">
+                <h3>2ème étape : Accompagnement pour l'obtention des aides</h3>
+                <h4>Sélection des devis :</h4>
+                <ul>
+                    <li>Envoi des devis : Après avoir sélectionné les entreprises, vous nous envoyez les devis obtenus.</li>
+                </ul>
+                <h4>Aide et financement :</h4>
+                <ul>
+                    <li>Dépôt des demandes d'aides : Nous vous aidons à déposer les demandes d'aides et de financements nécessaires pour votre projet.</li>
+                    <li>Conformité documentaire : Vérification de la conformité documentaire et administrative de vos documents.</li>
+                    <li>Montage du dossier : Accompagnement pour le montage du dossier auprès de l'ANAH.</li>
+                </ul>
+                <h4>Démarrage des travaux :</h4>
+                <ul>
+                    <li>Accord des aides : Une fois les aides accordées, vous pouvez démarrer les travaux.</li>
+                </ul>
+            </div>
+
+            <div class="process-step">
+                <h3>3ème étape : Visite post-chantier et accompagnement pour le versement des aides</h3>
+                <h4>Vérification post-chantier :</h4>
+                <ul>
+                    <li>Conformité des factures : Vérification des factures pour s'assurer qu'elles correspondent aux travaux réalisés.</li>
+                    <li>Visite de contrôle : Visite post-chantier pour vérifier que les travaux réalisés concordent avec le scénario de l'audit sélectionné et les devis.</li>
+                </ul>
+                <h4>Rapport final et versement des aides :</h4>
+                <ul>
+                    <li>Rapport de fin d'accompagnement : Remise d'un rapport détaillant la conformité et la qualité des travaux réalisés.</li>
+                    <li>Versement des aides : Assistance pour obtenir le versement des aides de l'ANAH.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h2>La satisfaction de nos clients</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-item">
+                    <p>"Notre audit nous a été livré dans les temps avec des explications claires. Merci aussi pour votre accompagnement concernant notre projet de rénovation. Je recommande!"</p>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Équipe disponible et réactif. Rapport fournit avec ses explications. Un accompagnement de qualité pour la rénovation de ma maison, je recommande fortement."</p>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Société très réactif, à l'écoute des questions, et forte en propositions. Les scenarios proposés matches parfaitement les stratégies d'amélioration énergétique de notre maison et le rapport est très clair. Je recommande ce bureau d'étude !"</p>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Rapport d'audit livré dans les délais attendus. Bonne interaction avec l'auditeur, réponses claires aux questions posées. Bonne réactivité et bon suivi du dossier par l'entreprise."</p>
+                </div>
+                <div class="testimonial-item">
+                    <p>"J'ai contacté Moha7vz pour effectuer un audit énergétique d'une maison ancienne, la visite s'est très bien passée. Le rapport était globalement conforme à ce que nous attendions. Une équipe disponible et compétente."</p>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Deuxième étude thermique réalisée avec ce professionnel et je ne peux que recommander. Professionnel, à l'écoute, conseils judicieux, ils prennent conscience des coûts supplémentaires pour les particuliers."</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="certifications">
+            <h2>Nos Certifications & Partenaires</h2>
+            <p>Nous sommes certifiés par les organismes de référence pour vous garantir un service de qualité</p>
+            
+            <div class="cert-slider">
+                <div class="cert-track" id="certTrack">
+                    <div class="cert-slide">
+                        <img src="img/Agence-Nationale-Habitat.webp" alt="Agence Nationale de l'Habitat" class="cert-logo">
+                        <h4>Agence Nationale de l'Habitat</h4>
+                    </div>
+                    <div class="cert-slide">
+                        <img src="img/FranceRenov.webp" alt="France Rénov'" class="cert-logo">
+                        <h4>France Rénov'</h4>
+                    </div>
+                    <div class="cert-slide">
+                        <img src="img/MaPrimeRenov.webp" alt="MaPrimeRénov'" class="cert-logo">
+                        <h4>MaPrimeRénov'</h4>
+                    </div>
+                    <div class="cert-slide">
+                        <img src="img/MAR-logo-p-500.webp" alt="MAR" class="cert-logo">
+                        <h4>MAR Certification</h4>
+                    </div>
+                    <div class="cert-slide">
+                        <img src="img/opqibi-removebg-preview.webp" alt="OPQIBI" class="cert-logo">
+                        <h4>Certification OPQIBI</h4>
+                    </div>
+                    <div class="cert-slide">
+                        <img src="img/RGE-Chauffage-Plus.webp" alt="RGE Chauffage+" class="cert-logo">
+                        <h4>RGE Chauffage+</h4>
+                    </div>
+                    <div class="cert-slide">
+                        <img src="img/RGE-Qualibat.webp" alt="RGE Qualibat" class="cert-logo">
+                        <h4>RGE Qualibat</h4>
+                    </div>
+                    <div class="cert-slide">
+                        <img src="img/RGE-Quali-Pac.webp" alt="RGE QualiPAC" class="cert-logo">
+                        <h4>RGE QualiPAC</h4>
+                    </div>
+                    <div class="cert-slide">
+                        <img src="img/RGE-Quali-Sol.webp" alt="RGE QualiSOL" class="cert-logo">
+                        <h4>RGE QualiSOL</h4>
+                    </div>
+                    <div class="cert-slide">
+                        <img src="img/Total-Energies.webp" alt="TotalEnergies" class="cert-logo">
+                        <h4>Partenaire TotalEnergies</h4>
+                    </div>
+                </div>
+                
+                <div class="cert-dots" id="certDots">
+                    <span class="cert-dot active" onclick="certGoToSlide(0)"></span>
+                    <span class="cert-dot" onclick="certGoToSlide(1)"></span>
+                    <span class="cert-dot" onclick="certGoToSlide(2)"></span>
+                    <span class="cert-dot" onclick="certGoToSlide(3)"></span>
+                    <span class="cert-dot" onclick="certGoToSlide(4)"></span>
+                    <span class="cert-dot" onclick="certGoToSlide(5)"></span>
+                    <span class="cert-dot" onclick="certGoToSlide(6)"></span>
+                    <span class="cert-dot" onclick="certGoToSlide(7)"></span>
+                    <span class="cert-dot" onclick="certGoToSlide(8)"></span>
+                    <span class="cert-dot" onclick="certGoToSlide(9)"></span>
+                </div>
+                
+                <div class="cert-status" id="certStatus">1 / 10</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Moha7vz</h3>
+                    <p>Votre partenaire de confiance pour une transition énergétique réussie.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>2 rue Coysevox 69001 Lyon</li>
+                        <li><a href="mailto:contact@moha7vz.fr">contact@moha7vz.fr</a></li>
+                        <li><a href="tel:0465843080">04 65 84 30 80</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li>Audit Énergétique</li>
+                        <li>Mon Accompagnateur Rénov'</li>
+                        <li>Conseil en énergie</li>
+                        <li>Rénovation énergétique</li>
+                    </ul>
+                </div>
+            </div>
+            <p>&copy; 2024 Moha7vz. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Système de carrousel pour les certifications
+        let certCurrentSlide = 0;
+        const certTotalSlides = 10;
+        let certAutoSlide;
+
+        function certUpdateSlider() {
+            const track = document.getElementById('certTrack');
+            const dots = document.querySelectorAll('.cert-dot');
+            const status = document.getElementById('certStatus');
+            
+            // Calculer le déplacement selon la taille d'écran
+            let slideWidth;
+            if (window.innerWidth <= 768) {
+                slideWidth = 152; // 120px + 32px gap (mobile)
+            } else {
+                slideWidth = 182; // 150px + 32px gap (desktop)
+            }
+            
+            const translateX = -(certCurrentSlide * slideWidth);
+            track.style.transform = `translateX(${translateX}px)`;
+            
+            // Mettre à jour les dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === certCurrentSlide);
+            });
+            
+            // Mettre à jour le status
+            status.textContent = `${certCurrentSlide + 1} / ${certTotalSlides}`;
+        }
+
+        function certNextSlide() {
+            certCurrentSlide = (certCurrentSlide + 1) % certTotalSlides;
+            certUpdateSlider();
+        }
+
+        function certPrevSlide() {
+            certCurrentSlide = (certCurrentSlide - 1 + certTotalSlides) % certTotalSlides;
+            certUpdateSlider();
+        }
+
+        function certGoToSlide(index) {
+            certCurrentSlide = index;
+            certUpdateSlider();
+            // Redémarrer l'auto-slide après interaction manuelle
+            certStopAutoSlide();
+            certStartAutoSlide();
+        }
+
+        function certStartAutoSlide() {
+            certAutoSlide = setInterval(certNextSlide, 3000); // Change toutes les 3 secondes
+        }
+
+        function certStopAutoSlide() {
+            clearInterval(certAutoSlide);
+        }
+
+        // Démarrer l'auto-slide au chargement
+        certStartAutoSlide();
+
+        // Arrêter l'auto-slide au survol, reprendre en quittant
+        const certSlider = document.querySelector('.cert-slider');
+        if (certSlider) {
+            certSlider.addEventListener('mouseenter', certStopAutoSlide);
+            certSlider.addEventListener('mouseleave', certStartAutoSlide);
+        }
+
+        // Event listener pour le redimensionnement de la fenêtre
+        window.addEventListener('resize', () => {
+            certUpdateSlider(); // Recalculer la position du slider
+        });
+
+        // Animation simple des éléments au scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Appliquer l'animation aux cartes de service
+        document.querySelectorAll('.service-card, .benefit-item, .testimonial-item').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Scroll lisse pour les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

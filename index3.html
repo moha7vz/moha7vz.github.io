@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sender Mail</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: white;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            padding: 20px;
+            color: white;
+            text-align: center;
+            border-radius: 0 0 25px 25px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .header .price {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            margin: 0 20px 20px 20px;
+            background: #f1f3f4;
+            border-radius: 25px;
+            padding: 4px;
+        }
+
+        .nav-tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-tab.active {
+            background: #4285f4;
+            color: white;
+            box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+        }
+
+        /* Page Content */
+        .page {
+            display: none;
+            padding: 0 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e8eaed;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4285f4, #34a853);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .profile-info h3 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .profile-info .email {
+            color: #5f6368;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #34a853;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #34a853;
+        }
+
+        .profile-details {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #5f6368;
+        }
+
+        /* Statistics */
+        .stats-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #202124;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e8eaed;
+            transition: transform 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            margin: 0 auto 12px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        .stat-icon.emails { background: #4285f4; }
+        .stat-icon.templates { background: #7c4dff; }
+        .stat-icon.success { background: #00c853; }
+        .stat-icon.contacts { background: #ff6d00; }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #202124;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #5f6368;
+        }
+
+        /* Compose Email */
+        .compose-form {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e8eaed;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e8eaed;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #4285f4;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .template-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .template-card {
+            padding: 15px;
+            border: 2px solid #e8eaed;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .template-card:hover {
+            border-color: #4285f4;
+            background: #f8f9ff;
+        }
+
+        .template-card.selected {
+            border-color: #4285f4;
+            background: #4285f4;
+            color: white;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: #4285f4;
+            color: white;
+            box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #3367d6;
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: #34a853;
+            color: white;
+            box-shadow: 0 2px 8px rgba(52, 168, 83, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #5f6368;
+            border: 1px solid #e8eaed;
+        }
+
+        .btn-block {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        /* Options */
+        .options-list {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e8eaed;
+            overflow: hidden;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            border-bottom: 1px solid #f1f3f4;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .option-item:last-child {
+            border-bottom: none;
+        }
+
+        .option-item:hover {
+            background: #f8f9fa;
+        }
+
+        .option-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #4285f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .option-content {
+            flex: 1;
+        }
+
+        .option-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .option-subtitle {
+            font-size: 14px;
+            color: #5f6368;
+        }
+
+        /* Recent Activity */
+        .activity-list {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e8eaed;
+            margin-bottom: 20px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #34a853;
+        }
+
+        .activity-text {
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .activity-time {
+            font-size: 12px;
+            color: #5f6368;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #5f6368;
+            font-size: 12px;
+        }
+
+        /* Animations */
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="price">€235.2</div>
+            <h1>📧 Sender Mail</h1>
+            <div class="subtitle">Gestionnaire d'emails professionnel</div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showPage('dashboard')">
+                📊 Dashboard
+            </div>
+            <div class="nav-tab" onclick="showPage('compose')">
+                ✍️ Composer
+            </div>
+        </div>
+
+        <!-- Page 1: Dashboard -->
+        <div id="dashboard" class="page active">
+            <!-- Profile Card -->
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar" id="userAvatar">JD</div>
+                    <div class="profile-info">
+                        <h3 id="userName">John Dupont</h3>
+                        <div class="email" id="userEmail">john.dupont@email.com</div>
+                        <div class="status">
+                            <div class="status-dot"></div>
+                            En ligne
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-details">
+                    <span>📞 +33 6 12 34 56 78</span>
+                    <span>📍 Paris, France</span>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="stats-section">
+                <div class="section-title">Statistiques</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon emails">📧</div>
+                        <div class="stat-number" id="emailsSent">1,247</div>
+                        <div class="stat-label">Emails Envoyés</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon templates">📄</div>
+                        <div class="stat-number" id="templatesUsed">23</div>
+                        <div class="stat-label">Templates Utilisés</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">✅</div>
+                        <div class="stat-number" id="successRate">98.5%</div>
+                        <div class="stat-label">Taux de Succès</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon contacts">👥</div>
+                        <div class="stat-number" id="contactsCount">456</div>
+                        <div class="stat-label">Contacts</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="stats-section">
+                <div class="section-title">Activité Récente</div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-dot"></div>
+                        <div class="activity-text">Email envoyé à marie.durand@company.com</div>
+                        <div class="activity-time">Il y a 2 min</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot"></div>
+                        <div class="activity-text">Template "Newsletter" créé</div>
+                        <div class="activity-time">Il y a 15 min</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot"></div>
+                        <div class="activity-text">Campagne "Promotion" lancée</div>
+                        <div class="activity-time">Il y a 1h</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Options -->
+            <div class="stats-section">
+                <div class="section-title">Options</div>
+                <div class="options-list">
+                    <div class="option-item" onclick="showSettings()">
+                        <div class="option-icon">⚙️</div>
+                        <div class="option-content">
+                            <div class="option-title">Paramètres</div>
+                            <div class="option-subtitle">Configuration de l'application</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 2: Compose Email -->
+        <div id="compose" class="page">
+            <!-- Template Selection -->
+            <div class="stats-section">
+                <div class="section-title">Choisir un Template</div>
+                <div class="template-selector">
+                    <div class="template-card" onclick="selectTemplate('newsletter')">
+                        <div>📰</div>
+                        <div>Newsletter</div>
+                    </div>
+                    <div class="template-card" onclick="selectTemplate('promo')">
+                        <div>🎯</div>
+                        <div>Promotion</div>
+                    </div>
+                    <div class="template-card" onclick="selectTemplate('welcome')">
+                        <div>👋</div>
+                        <div>Bienvenue</div>
+                    </div>
+                    <div class="template-card" onclick="selectTemplate('custom')">
+                        <div>✏️</div>
+                        <div>Personnalisé</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compose Form -->
+            <div class="compose-form">
+                <div class="form-group">
+                    <label class="form-label">Destinataire</label>
+                    <input type="email" class="form-input" id="recipient" placeholder="email@exemple.com">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Objet</label>
+                    <input type="text" class="form-input" id="subject" placeholder="Objet de l'email">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-input form-textarea" id="message" placeholder="Votre message..."></textarea>
+                </div>
+
+                <button class="btn btn-primary btn-block bounce" onclick="sendEmail()">
+                    📤 Envoyer Email
+                </button>
+                
+                <button class="btn btn-secondary btn-block" onclick="saveDraft()">
+                    💾 Sauvegarder Brouillon
+                </button>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats-section">
+                <div class="section-title">Statistiques Rapides</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon emails">📤</div>
+                        <div class="stat-number" id="todayEmails">42</div>
+                        <div class="stat-label">Aujourd'hui</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">📈</div>
+                        <div class="stat-number" id="weekEmails">287</div>
+                        <div class="stat-label">Cette Semaine</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>💼 Sender Mail Pro v2.1</p>
+            <p>@SenderMailBot - Développé avec ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let tg = window.Telegram.WebApp;
+        let selectedTemplate = null;
+        let stats = {
+            emailsSent: 1247,
+            templatesUsed: 23,
+            successRate: 98.5,
+            contactsCount: 456,
+            todayEmails: 42,
+            weekEmails: 287
+        };
+
+        // Initialisation
+        function initApp() {
+            tg.ready();
+            tg.expand();
+            
+            // Configuration des informations utilisateur
+            const user = tg.initDataUnsafe?.user;
+            if (user) {
+                const firstName = user.first_name || 'John';
+                const lastName = user.last_name || 'Dupont';
+                const initials = firstName.charAt(0) + (lastName ? lastName.charAt(0) : 'D');
+                
+                document.getElementById('userName').textContent = `${firstName} ${lastName}`;
+                document.getElementById('userEmail').textContent = user.username ? `${user.username}@telegram.com` : 'john.dupont@email.com';
+                document.getElementById('userAvatar').textContent = initials;
+            }
+
+            // Animation des statistiques
+            animateStats();
+            
+            // Configuration du bouton principal
+            tg.MainButton.text = "💾 Sauvegarder Données";
+            tg.MainButton.onClick(() => {
+                sendDataToBot();
+            });
+        }
+
+        // Navigation entre les pages
+        function showPage(pageId) {
+            // Masquer toutes les pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Masquer tous les onglets actifs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Afficher la page sélectionnée
+            document.getElementById(pageId).classList.add('active');
+            
+            // Activer l'onglet correspondant
+            event.target.classList.add('active');
+            
+            // Feedback haptique
+            tg.HapticFeedback.impactOccurred('light');
+        }
+
+        // Sélection de template
+        function selectTemplate(templateType) {
+            // Retirer la sélection précédente
+            document.querySelectorAll('.template-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Sélectionner le nouveau template
+            event.target.closest('.template-card').classList.add('selected');
+            selectedTemplate = templateType;
+            
+            // Pré-remplir selon le template
+            const templates = {
+                newsletter: {
+                    subject: "📰 Newsletter Mensuelle",
+                    message: "Bonjour,\n\nDécouvrez les dernières actualités de notre entreprise..."
+                },
+                promo: {
+                    subject: "🎯 Offre Spéciale - 50% de Réduction !",
+                    message: "Profitez de notre offre exceptionnelle..."
+                },
+                welcome: {
+                    subject: "👋 Bienvenue dans notre communauté !",
+                    message: "Nous sommes ravis de vous accueillir..."
+                },
+                custom: {
+                    subject: "",
+                    message: ""
+                }
+            };
+            
+            if (templates[templateType]) {
+                document.getElementById('subject').value = templates[templateType].subject;
+                document.getElementById('message').value = templates[templateType].message;
+            }
+            
+            tg.HapticFeedback.impactOccurred('medium');
+        }
+
+        // Envoi d'email
+        function sendEmail() {
+            const recipient = document.getElementById('recipient').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            if (!recipient || !subject || !message) {
+                tg.showAlert('Veuillez remplir tous les champs !');
+                return;
+            }
+            
+            // Simulation d'envoi
+            stats.emailsSent++;
+            stats.todayEmails++;
+            updateStatsDisplay();
+            
+            tg.showPopup({
+                title: '✅ Email Envoyé !',
+                message: `Email envoyé avec succès à ${recipient}`,
+                buttons: [{ type: 'ok', text: 'Super !' }]
+            });
+            
+            // Réinitialiser le formulaire
+            document.getElementById('recipient').value = '';
+            document.getElementById('subject').value = '';
+            document.getElementById('message').value = '';
+            
+            // Retirer la sélection de template
+            document.querySelectorAll('.template-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            tg.HapticFeedback.notificationOccurred('success');
+        }
+
+        // Sauvegarder brouillon
+        function saveDraft() {
+            tg.showAlert('📝 Brouillon sauvegardé !');
+            tg.HapticFeedback.impactOccurred('light');
+        }
+
+        // Paramètres
+        function showSettings() {
+            tg.showPopup({
+                title: '⚙️ Paramètres',
+                message: 'Configuration de l\'application Sender Mail',
+                buttons: [
+                    { type: 'default', text: 'Notifications' },
+                    { type: 'default', text: 'Signatures' },
+                    { type: 'cancel', text: 'Fermer' }
+                ]
+            });
+        }
+
+        // Animation des statistiques
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const finalValue = stat.textContent;
+                stat.textContent = '0';
+                
+                setTimeout(() => {
+                    stat.textContent = finalValue;
+                    stat.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        stat.style.transform = 'scale(1)';
+                    }, 200);
+                }, Math.random() * 1000);
+            });
+        }
+
+        // Mise à jour de l'affichage des stats
+        function updateStatsDisplay() {
+            document.getElementById('emailsSent').textContent = stats.emailsSent.toLocaleString();
+            document.getElementById('todayEmails').textContent = stats.todayEmails;
+        }
+
+        // Envoi des données au bot
+        function sendDataToBot() {
+            const data = {
+                action: 'save_email_stats',
+                stats: stats,
+                selectedTemplate: selectedTemplate,
+                timestamp: Date.now()
+            };
+
+            tg.sendData(JSON.stringify(data));
+            tg.showAlert('📊 Données sauvegardées !');
+        }
+
+        // Initialisation
+        window.addEventListener('DOMContentLoaded', initApp);
+        
+        // Gestion des thèmes Telegram
+        tg.onEvent('themeChanged', () => {
+            // Adaptation au thème sombre/clair si nécessaire
+        });
+    </script>
+</body>
+</html>

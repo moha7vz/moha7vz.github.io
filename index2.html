@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini App Bot</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--tg-theme-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #000000);
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .user-info {
+            background: var(--tg-theme-secondary-bg-color, #f8f9fa);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--tg-theme-hint-color, #e9ecef);
+        }
+
+        .counter-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .counter-display {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--tg-theme-button-color, #007bff);
+            margin: 20px 0;
+            padding: 20px;
+            background: var(--tg-theme-secondary-bg-color, #f8f9fa);
+            border-radius: 15px;
+            border: 2px solid var(--tg-theme-button-color, #007bff);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: var(--tg-theme-button-color, #007bff);
+            color: var(--tg-theme-button-text-color, white);
+        }
+
+        .btn-secondary {
+            background: var(--tg-theme-secondary-bg-color, #6c757d);
+            color: white;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .features {
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            background: var(--tg-theme-secondary-bg-color, #f8f9fa);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-left: 4px solid var(--tg-theme-button-color, #007bff);
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            width: 40px;
+            text-align: center;
+        }
+
+        .game-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .score {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-online {
+            background: #28a745;
+        }
+
+        .haptic-btn {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+        }
+
+        .footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 12px;
+            color: var(--tg-theme-hint-color, #6c757d);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🤖 Mini App Bot</h1>
+        <p>Votre assistant personnel dans Telegram</p>
+    </div>
+
+    <div class="user-info">
+        <h3>👤 Informations utilisateur</h3>
+        <p><span class="status-indicator status-online"></span><strong>Nom:</strong> <span id="userName">Chargement...</span></p>
+        <p><strong>ID:</strong> <span id="userId">Chargement...</span></p>
+        <p><strong>Version:</strong> <span id="version">Chargement...</span></p>
+    </div>
+
+    <div class="counter-section">
+        <h2>🎯 Compteur Interactif</h2>
+        <div class="counter-display" id="counter">0</div>
+        
+        <div class="button-group">
+            <button class="btn btn-success" onclick="increment()">➕ +1</button>
+            <button class="btn btn-danger" onclick="decrement()">➖ -1</button>
+            <button class="btn btn-secondary" onclick="reset()">🔄 Reset</button>
+        </div>
+    </div>
+
+    <div class="game-section">
+        <h3>🎮 Mini Jeu</h3>
+        <p>Cliquez sur le bouton autant de fois que possible!</p>
+        <div class="score">Score: <span id="gameScore">0</span></div>
+        <button class="btn haptic-btn" onclick="playGame()" style="color: white;">🚀 Cliquez-moi!</button>
+    </div>
+
+    <div class="features">
+        <h3>✨ Fonctionnalités</h3>
+        
+        <div class="feature-item">
+            <div class="feature-icon">📱</div>
+            <div>
+                <strong>Retour haptique</strong><br>
+                <button class="btn btn-primary" onclick="sendHaptic()">Vibrer</button>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-icon">💾</div>
+            <div>
+                <strong>Stockage de données</strong><br>
+                <button class="btn btn-primary" onclick="saveData()">Sauvegarder</button>
+                <button class="btn btn-secondary" onclick="loadData()">Charger</button>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-icon">🔗</div>
+            <div>
+                <strong>Partager l'app</strong><br>
+                <button class="btn btn-primary" onclick="shareApp()">Partager</button>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-icon">💰</div>
+            <div>
+                <strong>Interface de paiement</strong><br>
+                <button class="btn btn-success" onclick="showInvoice()">Acheter (1€)</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Développé avec ❤️ pour Telegram</p>
+        <p>Mini App API v6.0+</p>
+    </div>
+
+    <script>
+        // Variables globales
+        let counter = 0;
+        let gameScore = 0;
+        let tg = window.Telegram.WebApp;
+
+        // Initialisation de l'app
+        function initApp() {
+            // Configuration Telegram
+            tg.ready();
+            tg.expand();
+            
+            // Affichage des informations utilisateur
+            const user = tg.initDataUnsafe?.user;
+            if (user) {
+                document.getElementById('userName').textContent = 
+                    user.first_name + (user.last_name ? ' ' + user.last_name : '');
+                document.getElementById('userId').textContent = user.id;
+            } else {
+                document.getElementById('userName').textContent = 'Utilisateur de test';
+                document.getElementById('userId').textContent = '123456789';
+            }
+            
+            document.getElementById('version').textContent = tg.version || '6.0';
+
+            // Configuration du bouton principal
+            tg.MainButton.text = "Envoyer les données";
+            tg.MainButton.onClick(() => {
+                sendDataToBot();
+            });
+
+            // Charger les données sauvegardées
+            loadData();
+        }
+
+        // Fonctions du compteur
+        function increment() {
+            counter++;
+            updateCounterDisplay();
+            tg.HapticFeedback.impactOccurred('light');
+        }
+
+        function decrement() {
+            if (counter > 0) {
+                counter--;
+                updateCounterDisplay();
+                tg.HapticFeedback.impactOccurred('light');
+            }
+        }
+
+        function reset() {
+            counter = 0;
+            updateCounterDisplay();
+            tg.HapticFeedback.notificationOccurred('success');
+        }
+
+        function updateCounterDisplay() {
+            document.getElementById('counter').textContent = counter;
+            
+            // Afficher le bouton principal si le compteur > 0
+            if (counter > 0) {
+                tg.MainButton.show();
+            } else {
+                tg.MainButton.hide();
+            }
+        }
+
+        // Mini jeu
+        function playGame() {
+            gameScore++;
+            document.getElementById('gameScore').textContent = gameScore;
+            tg.HapticFeedback.impactOccurred('medium');
+            
+            // Animation du bouton
+            const btn = event.target;
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        // Fonctions Telegram
+        function sendHaptic() {
+            tg.HapticFeedback.impactOccurred('heavy');
+        }
+
+        function saveData() {
+            const data = {
+                counter: counter,
+                gameScore: gameScore,
+                timestamp: Date.now()
+            };
+            
+            // Note: Dans un vrai environnement, utilisez CloudStorage
+            localStorage.setItem('miniAppData', JSON.stringify(data));
+            tg.showPopup({
+                title: '💾 Sauvegarde',
+                message: 'Données sauvegardées avec succès!',
+                buttons: [{ type: 'ok' }]
+            });
+        }
+
+        function loadData() {
+            const saved = localStorage.getItem('miniAppData');
+            if (saved) {
+                const data = JSON.parse(saved);
+                counter = data.counter || 0;
+                gameScore = data.gameScore || 0;
+                updateCounterDisplay();
+                document.getElementById('gameScore').textContent = gameScore;
+            }
+        }
+
+        function shareApp() {
+            const shareUrl = 'https://t.me/VotreBotUsername/miniapp';
+            tg.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent('Découvrez cette super Mini App!')}`);
+        }
+
+        function showInvoice() {
+            // Note: Nécessite une configuration de paiement côté bot
+            tg.showPopup({
+                title: '💰 Paiement',
+                message: 'Fonctionnalité de paiement - nécessite la configuration du bot avec les fournisseurs de paiement.',
+                buttons: [
+                    { type: 'ok', text: 'Compris' }
+                ]
+            });
+        }
+
+        function sendDataToBot() {
+            const data = {
+                counter: counter,
+                gameScore: gameScore,
+                action: 'save_progress',
+                timestamp: Date.now()
+            };
+
+            // Envoyer les données au bot
+            tg.sendData(JSON.stringify(data));
+            
+            tg.showAlert('Données envoyées au bot!');
+        }
+
+        // Gestion des événements Telegram
+        tg.onEvent('mainButtonClicked', sendDataToBot);
+
+        tg.onEvent('backButtonClicked', () => {
+            tg.close();
+        });
+
+        // Initialisation
+        window.addEventListener('DOMContentLoaded', initApp);
+
+        // Gestion des thèmes
+        function updateTheme() {
+            document.documentElement.style.setProperty('--tg-theme-bg-color', tg.themeParams.bg_color);
+            document.documentElement.style.setProperty('--tg-theme-text-color', tg.themeParams.text_color);
+            document.documentElement.style.setProperty('--tg-theme-button-color', tg.themeParams.button_color);
+        }
+
+        tg.onEvent('themeChanged', updateTheme);
+        updateTheme();
+    </script>
+</body>
+</html>

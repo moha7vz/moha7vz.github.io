@@ -459,18 +459,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            color: white;
-            font-size: 18px;
             transition: transform 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .bank-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
         }
 
         .bank-card:hover .bank-logo {
             transform: scale(1.1) rotate(3deg);
         }
 
-        /* Logos spécifiques des banques */
+        /* Logos spécifiques des banques - fallback colors */
         .bank-logo.sg { 
             background: linear-gradient(135deg, #e31e24, #b71c1c);
         }
@@ -522,11 +527,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
             transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+
+        .bank-logo-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 15px;
         }
 
         .bank-selected:hover .bank-logo-large {
@@ -922,27 +932,39 @@
                     <div class="section-title">Sélectionnez votre Banque</div>
                     <div class="bank-grid">
                         <div class="bank-card" onclick="selectBank('sg')">
-                            <div class="bank-logo sg">SG</div>
+                            <div class="bank-logo sg">
+                                <img src="templogo/sg.png" alt="Société Générale" onerror="this.style.display='none'; this.parentNode.innerHTML='SG'; this.parentNode.style.fontSize='18px'; this.parentNode.style.fontWeight='bold'; this.parentNode.style.color='white';">
+                            </div>
                             <div class="bank-name">Société Générale</div>
                         </div>
                         <div class="bank-card" onclick="selectBank('bnp')">
-                            <div class="bank-logo bnp">BNP</div>
+                            <div class="bank-logo bnp">
+                                <img src="bnp.png" alt="BNP Paribas" onerror="this.style.display='none'; this.parentNode.innerHTML='BNP'; this.parentNode.style.fontSize='18px'; this.parentNode.style.fontWeight='bold'; this.parentNode.style.color='white';">
+                            </div>
                             <div class="bank-name">BNP Paribas</div>
                         </div>
                         <div class="bank-card" onclick="selectBank('ca')">
-                            <div class="bank-logo ca">CA</div>
+                            <div class="bank-logo ca">
+                                <img src="templogo/ca.png" alt="Crédit Agricole" onerror="this.style.display='none'; this.parentNode.innerHTML='CA'; this.parentNode.style.fontSize='18px'; this.parentNode.style.fontWeight='bold'; this.parentNode.style.color='white';">
+                            </div>
                             <div class="bank-name">Crédit Agricole</div>
                         </div>
                         <div class="bank-card" onclick="selectBank('lcl')">
-                            <div class="bank-logo lcl">LCL</div>
+                            <div class="bank-logo lcl">
+                                <img src="lcl.png" alt="LCL" onerror="this.style.display='none'; this.parentNode.innerHTML='LCL'; this.parentNode.style.fontSize='18px'; this.parentNode.style.fontWeight='bold'; this.parentNode.style.color='white';">
+                            </div>
                             <div class="bank-name">LCL</div>
                         </div>
                         <div class="bank-card" onclick="selectBank('cm')">
-                            <div class="bank-logo cm">CM</div>
+                            <div class="bank-logo cm">
+                                <img src="cm.png" alt="Crédit Mutuel" onerror="this.style.display='none'; this.parentNode.innerHTML='CM'; this.parentNode.style.fontSize='18px'; this.parentNode.style.fontWeight='bold'; this.parentNode.style.color='white';">
+                            </div>
                             <div class="bank-name">Crédit Mutuel</div>
                         </div>
                         <div class="bank-card" onclick="selectBank('postale')">
-                            <div class="bank-logo postale">BP</div>
+                            <div class="bank-logo postale">
+                                <img src="templogo/lbp.png" alt="La Banque Postale" onerror="this.style.display='none'; this.parentNode.innerHTML='BP'; this.parentNode.style.fontSize='18px'; this.parentNode.style.fontWeight='bold'; this.parentNode.style.color='white';">
+                            </div>
                             <div class="bank-name">Banque Postale</div>
                         </div>
                     </div>
@@ -952,7 +974,9 @@
                 <div id="conseillerSection" class="section-content hidden">
                     <div class="section-title">Informations Conseiller</div>
                     <div class="bank-selected" id="selectedBankInfo">
-                        <div class="bank-logo-large sg">SG</div>
+                        <div class="bank-logo-large sg">
+                            <img src="sg.png" alt="Société Générale" onerror="this.style.display='none'; this.parentNode.innerHTML='SG'; this.parentNode.style.fontSize='24px'; this.parentNode.style.fontWeight='bold'; this.parentNode.style.color='white';">
+                        </div>
                         <div class="bank-details">
                             <h3 id="selectedBankName">Société Générale</h3>
                             <button class="btn-secondary" onclick="showConseillerForm()">Conseiller une personne</button>
@@ -1034,41 +1058,47 @@
         let selectedType = null;
         let selectedBank = null;
 
-        // Informations des banques avec styles
+        // Informations des banques avec styles et images
         const bankInfo = {
             'sg': {
                 name: 'Société Générale',
                 logo: 'SG',
+                image: 'sg.png',
                 className: 'sg',
                 email: 'conseiller@societegenerale.fr'
             },
             'bnp': {
                 name: 'BNP Paribas',
                 logo: 'BNP',
+                image: 'bnp.png',
                 className: 'bnp',
                 email: 'conseiller@bnpparibas.fr'
             },
             'ca': {
                 name: 'Crédit Agricole',
                 logo: 'CA',
+                image: 'ca.png',
                 className: 'ca',
                 email: 'conseiller@credit-agricole.fr'
             },
             'lcl': {
                 name: 'LCL',
                 logo: 'LCL',
+                image: 'lcl.png',
                 className: 'lcl',
                 email: 'conseiller@lcl.fr'
             },
             'cm': {
                 name: 'Crédit Mutuel',
                 logo: 'CM',
+                image: 'cm.png',
                 className: 'cm',
                 email: 'conseiller@creditmutuel.fr'
             },
             'postale': {
                 name: 'La Banque Postale',
                 logo: 'BP',
+                image: 'lbp.png',
                 className: 'postale',
                 email: 'conseiller@labanquepostale.fr'
             }
@@ -1185,8 +1215,11 @@
             
             // Mettre à jour les informations de la banque sélectionnée
             const logoElement = document.querySelector('#selectedBankInfo .bank-logo-large');
-            logoElement.textContent = bank.logo;
             logoElement.className = `bank-logo-large ${bank.className}`;
+            
+            // Créer l'image avec fallback
+            logoElement.innerHTML = `<img src="${bank.image}" alt="${bank.name}" onerror="this.style.display='none'; this.parentNode.innerHTML='${bank.logo}'; this.parentNode.style.fontSize='24px'; this.parentNode.style.fontWeight='bold'; this.parentNode.style.color='white';">`;
+            
             document.getElementById('selectedBankName').textContent = bank.name;
             
             // Masquer la section des banques et afficher la section conseiller

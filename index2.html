@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini App Bot</title>
+    <title>Sender Mail Pro</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * {
@@ -14,410 +14,1463 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--tg-theme-bg-color, #ffffff);
-            color: var(--tg-theme-text-color, #000000);
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background: #f8f9fa;
+            color: #2c3e50;
+            overflow-x: hidden;
         }
 
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: white;
+            position: relative;
+        }
+
+        /* Header */
         .header {
-            text-align: center;
-            margin-bottom: 30px;
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
             padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
             color: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            border-radius: 0 0 25px 25px;
+            margin-bottom: 20px;
         }
 
         .header h1 {
-            font-size: 24px;
+            font-size: 22px;
+            font-weight: 600;
             margin-bottom: 5px;
         }
 
-        .header p {
+        .header .subtitle {
             font-size: 14px;
             opacity: 0.9;
         }
 
-        .user-info {
-            background: var(--tg-theme-secondary-bg-color, #f8f9fa);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid var(--tg-theme-hint-color, #e9ecef);
-        }
-
-        .counter-section {
-            text-align: center;
-            margin: 30px 0;
-        }
-
-        .counter-display {
-            font-size: 48px;
-            font-weight: bold;
-            color: var(--tg-theme-button-color, #007bff);
-            margin: 20px 0;
-            padding: 20px;
-            background: var(--tg-theme-secondary-bg-color, #f8f9fa);
-            border-radius: 15px;
-            border: 2px solid var(--tg-theme-button-color, #007bff);
-        }
-
-        .button-group {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
+        .header .price {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 120px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .btn-primary {
-            background: var(--tg-theme-button-color, #007bff);
-            color: var(--tg-theme-button-text-color, white);
+        .header .license-status {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
         }
 
-        .btn-secondary {
-            background: var(--tg-theme-secondary-bg-color, #6c757d);
-            color: white;
+        .header .license-status.premium {
+            background: #ffd700;
+            color: #000;
         }
 
-        .btn-success {
-            background: #28a745;
-            color: white;
+        /* License Screen */
+        .license-screen {
+            padding: 20px;
+            text-align: center;
         }
 
-        .btn-danger {
-            background: #dc3545;
-            color: white;
+        .lock-icon {
+            font-size: 80px;
+            margin: 40px 0;
+            opacity: 0.5;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        .license-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e8eaed;
         }
 
-        .btn:active {
-            transform: translateY(0);
+        .license-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #202124;
         }
 
-        .features {
-            margin-top: 30px;
+        .license-price {
+            font-size: 36px;
+            font-weight: bold;
+            color: #4285f4;
+            margin: 20px 0;
+        }
+
+        .license-features {
+            text-align: left;
+            margin: 20px 0;
         }
 
         .feature-item {
-            background: var(--tg-theme-secondary-bg-color, #f8f9fa);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 15px;
-            border-left: 4px solid var(--tg-theme-button-color, #007bff);
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 14px;
         }
 
-        .feature-icon {
-            font-size: 24px;
-            width: 40px;
-            text-align: center;
+        .feature-check {
+            color: #34a853;
+            font-weight: bold;
         }
 
-        .game-section {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        /* Crypto Payment */
+        .crypto-section {
+            background: #f8f9fa;
             border-radius: 15px;
             padding: 20px;
             margin: 20px 0;
-            color: white;
-            text-align: center;
         }
 
-        .score {
+        .crypto-title {
             font-size: 18px;
-            font-weight: bold;
-            margin: 10px 0;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #202124;
         }
 
-        .status-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
+        .crypto-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .crypto-card {
+            background: white;
+            border: 2px solid #e8eaed;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .crypto-card:hover {
+            border-color: #4285f4;
+            transform: translateY(-2px);
+        }
+
+        .crypto-card.selected {
+            border-color: #4285f4;
+            background: #f8f9ff;
+        }
+
+        .crypto-icon {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .crypto-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .crypto-amount {
+            font-size: 14px;
+            color: #5f6368;
+        }
+
+        .payment-address {
+            background: #202124;
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            word-break: break-all;
+            margin: 15px 0;
+            display: none;
+        }
+
+        .payment-qr {
+            width: 200px;
+            height: 200px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px auto;
+            font-size: 14px;
+            color: #666;
+            display: none;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            margin: 0 20px 20px 20px;
+            background: #f1f3f4;
+            border-radius: 25px;
+            padding: 4px;
+        }
+
+        .nav-tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            opacity: 0.5;
+        }
+
+        .nav-tab.active {
+            background: #4285f4;
+            color: white;
+            box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+            opacity: 1;
+        }
+
+        .nav-tab.disabled {
+            cursor: not-allowed;
+            opacity: 0.3;
+        }
+
+        /* Page Content */
+        .page {
+            display: none;
+            padding: 0 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e8eaed;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            margin-right: 8px;
+            background: linear-gradient(135deg, #4285f4, #34a853);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        .status-online {
-            background: #28a745;
+        .profile-info h3 {
+            font-size: 18px;
+            margin-bottom: 4px;
         }
 
-        .haptic-btn {
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
+        .profile-info .email {
+            color: #5f6368;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #34a853;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #34a853;
+        }
+
+        .profile-details {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #5f6368;
+        }
+
+        /* Statistics */
+        .stats-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #202124;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e8eaed;
+            transition: transform 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            margin: 0 auto 12px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        .stat-icon.emails { background: #4285f4; }
+        .stat-icon.templates { background: #7c4dff; }
+        .stat-icon.success { background: #00c853; }
+        .stat-icon.contacts { background: #ff6d00; }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #202124;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #5f6368;
+        }
+
+        /* Email Composer */
+        .compose-form {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e8eaed;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #202124;
+            font-size: 14px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e8eaed;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #4285f4;
+            background: #f8f9ff;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .template-selector {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .template-card {
+            background: white;
+            border: 2px solid #e8eaed;
+            border-radius: 10px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .template-card:hover {
+            border-color: #4285f4;
+        }
+
+        .template-card.selected {
+            border-color: #4285f4;
+            background: #f8f9ff;
+        }
+
+        .template-emoji {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: #4285f4;
+            color: white;
+            box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #3367d6;
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-success {
+            background: #34a853;
+            color: white;
+            box-shadow: 0 2px 8px rgba(52, 168, 83, 0.3);
+        }
+
+        .btn-crypto {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 107, 53, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0); }
         }
 
-        .footer {
-            margin-top: auto;
+        .btn-block {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        /* Trial Banner */
+        .trial-banner {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            margin: 0 20px 20px 20px;
             text-align: center;
-            padding: 20px 0;
+            font-weight: 600;
+        }
+
+        .trial-timer {
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #5f6368;
             font-size: 12px;
-            color: var(--tg-theme-hint-color, #6c757d);
+        }
+
+        /* Hide elements */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Premium badge */
+        .premium-badge {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        /* Loading and alerts */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            color: white;
+            font-size: 18px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 15px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Templates Section */
+        .templates-section {
+            margin-bottom: 30px;
+        }
+
+        .premium-templates {
+            display: grid;
+            gap: 15px;
+        }
+
+        .template-item {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e8eaed;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .template-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .template-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .template-icon {
+            font-size: 24px;
+        }
+
+        .template-name {
+            font-weight: 600;
+            color: #202124;
+        }
+
+        .template-description {
+            color: #5f6368;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .template-tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .template-tag {
+            background: #f1f3f4;
+            color: #5f6368;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🤖 Mini App Bot</h1>
-        <p>Votre assistant personnel dans Telegram</p>
-    </div>
+    <div class="app-container">
+        <!-- License Screen -->
+        <div id="licenseScreen" class="license-screen">
+            <div class="header">
+                <div class="license-status" id="licenseStatus">🔒 Version Gratuite</div>
+                <div class="price">€235.2</div>
+                <h1>📧 Sender Mail Pro</h1>
+                <div class="subtitle">Version Professionnelle Premium</div>
+            </div>
 
-    <div class="user-info">
-        <h3>👤 Informations utilisateur</h3>
-        <p><span class="status-indicator status-online"></span><strong>Nom:</strong> <span id="userName">Chargement...</span></p>
-        <p><strong>ID:</strong> <span id="userId">Chargement...</span></p>
-        <p><strong>Version:</strong> <span id="version">Chargement...</span></p>
-    </div>
+            <div class="lock-icon">🔐</div>
+            
+            <div class="license-card">
+                <div class="license-title">Débloquer Sender Mail Pro</div>
+                <div class="license-price">0.005 BTC</div>
+                <div style="text-align: center; color: #5f6368; margin-bottom: 20px;">~€235.2</div>
+                
+                <div class="license-features">
+                    <div class="feature-item">
+                        <span class="feature-check">✅</span>
+                        <span>Envois d'emails illimités via SpoofWave</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✅</span>
+                        <span>Templates premium avancés</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✅</span>
+                        <span>Statistiques détaillées</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✅</span>
+                        <span>Support prioritaire 24/7</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✅</span>
+                        <span>API SpoofWave intégrée</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✅</span>
+                        <span>Licence à vie</span>
+                    </div>
+                </div>
+            </div>
 
-    <div class="counter-section">
-        <h2>🎯 Compteur Interactif</h2>
-        <div class="counter-display" id="counter">0</div>
-        
-        <div class="button-group">
-            <button class="btn btn-success" onclick="increment()">➕ +1</button>
-            <button class="btn btn-danger" onclick="decrement()">➖ -1</button>
-            <button class="btn btn-secondary" onclick="reset()">🔄 Reset</button>
-        </div>
-    </div>
+            <!-- Crypto Payment Section -->
+            <div class="crypto-section">
+                <div class="crypto-title">💰 Choisissez votre crypto-monnaie</div>
+                
+                <div class="crypto-options">
+                    <div class="crypto-card" onclick="selectCrypto('bitcoin')">
+                        <div class="crypto-icon">₿</div>
+                        <div class="crypto-name">Bitcoin</div>
+                        <div class="crypto-amount">0.005 BTC</div>
+                    </div>
+                    <div class="crypto-card" onclick="selectCrypto('ethereum')">
+                        <div class="crypto-icon">Ξ</div>
+                        <div class="crypto-name">Ethereum</div>
+                        <div class="crypto-amount">0.12 ETH</div>
+                    </div>
+                    <div class="crypto-card" onclick="selectCrypto('usdt')">
+                        <div class="crypto-icon">₮</div>
+                        <div class="crypto-name">USDT</div>
+                        <div class="crypto-amount">235.2 USDT</div>
+                    </div>
+                    <div class="crypto-card" onclick="selectCrypto('ton')">
+                        <div class="crypto-icon">💎</div>
+                        <div class="crypto-name">TON</div>
+                        <div class="crypto-amount">120 TON</div>
+                    </div>
+                </div>
 
-    <div class="game-section">
-        <h3>🎮 Mini Jeu</h3>
-        <p>Cliquez sur le bouton autant de fois que possible!</p>
-        <div class="score">Score: <span id="gameScore">0</span></div>
-        <button class="btn haptic-btn" onclick="playGame()" style="color: white;">🚀 Cliquez-moi!</button>
-    </div>
+                <div class="payment-address" id="paymentAddress">
+                    Adresse de paiement :<br>
+                    <span id="cryptoAddress">Sélectionnez une crypto-monnaie</span>
+                </div>
 
-    <div class="features">
-        <h3>✨ Fonctionnalités</h3>
-        
-        <div class="feature-item">
-            <div class="feature-icon">📱</div>
-            <div>
-                <strong>Retour haptique</strong><br>
-                <button class="btn btn-primary" onclick="sendHaptic()">Vibrer</button>
+                <div class="payment-qr" id="paymentQR">
+                    QR Code de paiement
+                </div>
+
+                <button class="btn btn-crypto btn-block" id="payButton" onclick="processPayment()" disabled>
+                    🚀 Effectuer le Paiement
+                </button>
+                
+                <button class="btn btn-success btn-block" onclick="simulatePayment()">
+                    ⚡ Mode Démo (Simuler Paiement)
+                </button>
             </div>
         </div>
 
-        <div class="feature-item">
-            <div class="feature-icon">💾</div>
-            <div>
-                <strong>Stockage de données</strong><br>
-                <button class="btn btn-primary" onclick="saveData()">Sauvegarder</button>
-                <button class="btn btn-secondary" onclick="loadData()">Charger</button>
+        <!-- Trial Banner (shown when unlocked) -->
+        <div id="trialBanner" class="trial-banner hidden">
+            <div>🎉 Version Premium Activée !</div>
+            <div class="trial-timer" id="trialTimer">SpoofWave API • Envois illimités</div>
+        </div>
+
+        <!-- Main App Content -->
+        <div id="mainApp" class="hidden">
+            <!-- Header -->
+            <div class="header">
+                <div class="license-status premium" id="premiumStatus">✨ Premium</div>
+                <div class="price">€235.2</div>
+                <h1>📧 Sender Mail Pro<span class="premium-badge">PREMIUM</span></h1>
+                <div class="subtitle">SpoofWave API • Version Débloquée</div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="nav-tabs">
+                <div class="nav-tab active" onclick="showPage('dashboard')">
+                    📊 Dashboard
+                </div>
+                <div class="nav-tab" onclick="showPage('compose')">
+                    ✍️ Composer
+                </div>
+                <div class="nav-tab" onclick="showPage('templates')">
+                    📄 Templates
+                </div>
+            </div>
+
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page active">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar" id="userAvatar">JD</div>
+                        <div class="profile-info">
+                            <h3 id="userName">John Dupont</h3>
+                            <div class="email" id="userEmail">john.dupont@email.com</div>
+                            <div class="status">
+                                <div class="status-dot"></div>
+                                Premium Actif • SpoofWave API
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-details">
+                        <span>📞 +33 6 12 34 56 78</span>
+                        <span>📍 Paris, France</span>
+                    </div>
+                </div>
+
+                <div class="stats-section">
+                    <div class="section-title">Statistiques Premium</div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon emails">📧</div>
+                            <div class="stat-number" id="totalEmails">0</div>
+                            <div class="stat-label">Emails Envoyés</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon templates">📄</div>
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Templates Premium</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon success">✅</div>
+                            <div class="stat-number" id="successRate">100%</div>
+                            <div class="stat-label">Taux de Succès</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon contacts">🚀</div>
+                            <div class="stat-number">∞</div>
+                            <div class="stat-label">API SpoofWave</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compose Page -->
+            <div id="compose" class="page">
+                <div class="stats-section">
+                    <div class="section-title">Composer un Email</div>
+                    
+                    <div class="compose-form">
+                        <form id="emailForm">
+                            <div class="form-group">
+                                <label class="form-label">📤 Nom de l'expéditeur</label>
+                                <input type="text" class="form-input" id="senderName" placeholder="Votre nom" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">📧 Email expéditeur</label>
+                                <input type="email" class="form-input" id="senderEmail" placeholder="votre@email.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">👤 Email destinataire</label>
+                                <input type="email" class="form-input" id="recipientEmail" placeholder="destinataire@email.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">📝 Sujet</label>
+                                <input type="text" class="form-input" id="emailSubject" placeholder="Sujet de votre email" required>
+                            </div>
+
+                            <div class="template-selector">
+                                <label class="form-label">🎨 Template rapide (optionnel)</label>
+                                <div class="template-grid">
+                                    <div class="template-card" onclick="selectQuickTemplate('business')">
+                                        <span class="template-emoji">💼</span>
+                                        Business
+                                    </div>
+                                    <div class="template-card" onclick="selectQuickTemplate('marketing')">
+                                        <span class="template-emoji">📈</span>
+                                        Marketing
+                                    </div>
+                                    <div class="template-card" onclick="selectQuickTemplate('newsletter')">
+                                        <span class="template-emoji">📰</span>
+                                        Newsletter
+                                    </div>
+                                    <div class="template-card" onclick="selectQuickTemplate('personal')">
+                                        <span class="template-emoji">👋</span>
+                                        Personnel
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">💬 Message</label>
+                                <textarea class="form-input form-textarea" id="emailMessage" placeholder="Votre message..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block" id="sendButton">
+                                🚀 Envoyer via SpoofWave API
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Templates Page -->
+            <div id="templates" class="page">
+                <div class="templates-section">
+                    <div class="section-title">Templates Premium</div>
+                    
+                    <div class="premium-templates">
+                        <div class="template-item" onclick="useTemplate('business-proposal')">
+                            <div class="template-header">
+                                <span class="template-icon">💼</span>
+                                <span class="template-name">Proposition Business</span>
+                            </div>
+                            <div class="template-description">Template professionnel pour les propositions commerciales</div>
+                            <div class="template-tags">
+                                <span class="template-tag">Business</span>
+                                <span class="template-tag">Professionnel</span>
+                            </div>
+                        </div>
+
+                        <div class="template-item" onclick="useTemplate('marketing-campaign')">
+                            <div class="template-header">
+                                <span class="template-icon">📈</span>
+                                <span class="template-name">Campagne Marketing</span>
+                            </div>
+                            <div class="template-description">Template optimisé pour les campagnes marketing</div>
+                            <div class="template-tags">
+                                <span class="template-tag">Marketing</span>
+                                <span class="template-tag">Conversion</span>
+                            </div>
+                        </div>
+
+                        <div class="template-item" onclick="useTemplate('newsletter')">
+                            <div class="template-header">
+                                <span class="template-icon">📰</span>
+                                <span class="template-name">Newsletter Premium</span>
+                            </div>
+                            <div class="template-description">Design moderne pour newsletters engageantes</div>
+                            <div class="template-tags">
+                                <span class="template-tag">Newsletter</span>
+                                <span class="template-tag">Engagement</span>
+                            </div>
+                        </div>
+
+                        <div class="template-item" onclick="useTemplate('follow-up')">
+                            <div class="template-header">
+                                <span class="template-icon">🔄</span>
+                                <span class="template-name">Email de Suivi</span>
+                            </div>
+                            <div class="template-description">Template pour les emails de relance professionnelle</div>
+                            <div class="template-tags">
+                                <span class="template-tag">Suivi</span>
+                                <span class="template-tag">Relance</span>
+                            </div>
+                        </div>
+
+                        <div class="template-item" onclick="useTemplate('welcome')">
+                            <div class="template-header">
+                                <span class="template-icon">👋</span>
+                                <span class="template-name">Email de Bienvenue</span>
+                            </div>
+                            <div class="template-description">Parfait pour accueillir de nouveaux clients</div>
+                            <div class="template-tags">
+                                <span class="template-tag">Bienvenue</span>
+                                <span class="template-tag">Onboarding</span>
+                            </div>
+                        </div>
+
+                        <div class="template-item" onclick="useTemplate('promotion')">
+                            <div class="template-header">
+                                <span class="template-icon">🎉</span>
+                                <span class="template-name">Email Promotionnel</span>
+                            </div>
+                            <div class="template-description">Template attrayant pour les promotions et offres</div>
+                            <div class="template-tags">
+                                <span class="template-tag">Promotion</span>
+                                <span class="template-tag">Vente</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="feature-item">
-            <div class="feature-icon">🔗</div>
-            <div>
-                <strong>Partager l'app</strong><br>
-                <button class="btn btn-primary" onclick="shareApp()">Partager</button>
-            </div>
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay hidden">
+            <div class="spinner"></div>
+            <span>Envoi en cours via SpoofWave...</span>
         </div>
 
-        <div class="feature-item">
-            <div class="feature-icon">💰</div>
-            <div>
-                <strong>Interface de paiement</strong><br>
-                <button class="btn btn-success" onclick="showInvoice()">Acheter (1€)</button>
-            </div>
+        <!-- Footer -->
+        <div class="footer">
+            <p>💼 Sender Mail Pro v2.1 Premium</p>
+            <p>@SenderMailBot - SpoofWave API Integration</p>
         </div>
-    </div>
-
-    <div class="footer">
-        <p>Développé avec ❤️ pour Telegram</p>
-        <p>Mini App API v6.0+</p>
     </div>
 
     <script>
         // Variables globales
-        let counter = 0;
-        let gameScore = 0;
         let tg = window.Telegram.WebApp;
+        let hasLicense = false;
+        let selectedCrypto = null;
+        let selectedQuickTemplate = null;
 
-        // Initialisation de l'app
+        // Adresses crypto pour les paiements
+        const cryptoAddresses = {
+            bitcoin: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
+            ethereum: '0x742C4B4F0F1b0C3e4C3fF4Aaf2F2F0F0F0F0F0F0',
+            usdt: 'TQrZ4KjZjgZ4j4j4j4j4j4j4j4j4j4j4j4',
+            ton: 'EQDtFpEwcFAEcRe5mLVh2N6C4D-YrAqp3f3f3f3f3f'
+        };
+
+        // Templates prédéfinis
+        const emailTemplates = {
+            business: {
+                subject: "Proposition de partenariat",
+                message: `Bonjour,
+
+J'espère que vous allez bien. Je vous contacte concernant une opportunité de partenariat qui pourrait être bénéfique pour nos deux organisations.
+
+Je serais ravi de discuter de cette proposition avec vous. Pourriez-vous me faire savoir si vous seriez disponible pour un appel cette semaine ?
+
+Cordialement,`
+            },
+            marketing: {
+                subject: "🚀 Offre spéciale limitée !",
+                message: `Bonjour,
+
+Nous avons une offre exceptionnelle à vous proposer ! Pour une durée limitée, profitez de -50% sur tous nos services.
+
+Cette offre est valable uniquement jusqu'à la fin du mois. Ne manquez pas cette opportunité !
+
+Pour en savoir plus, cliquez ici : [LIEN]
+
+À bientôt !`
+            },
+            newsletter: {
+                subject: "📰 Newsletter - Les dernières nouveautés",
+                message: `Bonjour,
+
+Voici les dernières actualités de notre entreprise :
+
+🔹 Nouvelle fonctionnalité lancée
+🔹 Mise à jour importante
+🔹 Événement à venir
+
+Restez connecté pour ne rien manquer !
+
+L'équipe`
+            },
+            personal: {
+                subject: "Prise de contact",
+                message: `Bonjour,
+
+J'espère que ce message vous trouvera en bonne santé.
+
+Je souhaitais prendre contact avec vous pour...
+
+N'hésitez pas à me contacter si vous avez des questions.
+
+Bonne journée !`
+            }
+        };
+
+        // Templates premium détaillés
+        const premiumTemplates = {
+            'business-proposal': {
+                subject: "Proposition de collaboration stratégique",
+                message: `Bonjour [NOM],
+
+Suite à notre échange, j'ai le plaisir de vous présenter une proposition de collaboration qui pourrait créer une synergie remarquable entre nos entreprises.
+
+POINTS CLÉS :
+• Opportunité de marché identifiée
+• Complémentarité de nos expertises  
+• ROI projeté de 150% sur 12 mois
+
+Je serais ravi de planifier une réunion pour discuter en détail de cette opportunité.
+
+Cordialement,
+[SIGNATURE]`
+            },
+            'marketing-campaign': {
+                subject: "🎯 [OFFRE LIMITÉE] Transformez votre business dès aujourd'hui",
+                message: `Bonjour [PRÉNOM],
+
+Imaginez pouvoir DOUBLER vos résultats en seulement 30 jours...
+
+✅ +200% de conversions en moyenne
+✅ ROI garanti ou remboursé  
+✅ Support personnalisé inclus
+
+OFFRE SPÉCIALE AUJOURD'HUI :
+🎁 50% de réduction (économisez 497€)
+⏰ Plus que 24h pour en profiter
+
+[BOUTON CTA: Je veux transformer mon business]
+
+À très bientôt !`
+            },
+            'newsletter': {
+                subject: "📊 Vos résultats de la semaine + 3 tips exclusifs",
+                message: `Bonjour [PRÉNOM],
+
+Voici votre résumé hebdomadaire personnalisé :
+
+📈 VOS PERFORMANCES :
+• Objectif : +25% par rapport à la semaine dernière
+• Tendance : En hausse constante
+• Prochaine étape : Optimisation recommandée
+
+💡 3 TIPS EXCLUSIFS CETTE SEMAINE :
+1. [Astuce stratégique #1]
+2. [Technique avancée #2]  
+3. [Hack de productivité #3]
+
+🔥 RESSOURCE GRATUITE :
+Guide PDF exclusif en pièce jointe
+
+L'équipe`
+            }
+        };
+
+        // Statistiques utilisateur
+        let userStats = {
+            totalEmails: 0,
+            successRate: 100
+        };
+
+        // Initialisation
         function initApp() {
-            // Configuration Telegram
             tg.ready();
             tg.expand();
             
-            // Affichage des informations utilisateur
+            // Vérification de la licence (simulation avec localStorage)
+            checkLicense();
+            
+            // Configuration des informations utilisateur
             const user = tg.initDataUnsafe?.user;
-            if (user) {
-                document.getElementById('userName').textContent = 
-                    user.first_name + (user.last_name ? ' ' + user.last_name : '');
-                document.getElementById('userId').textContent = user.id;
-            } else {
-                document.getElementById('userName').textContent = 'Utilisateur de test';
-                document.getElementById('userId').textContent = '123456789';
+            if (user && hasLicense) {
+                const firstName = user.first_name || 'John';
+                const lastName = user.last_name || 'Dupont';
+                const initials = firstName.charAt(0) + (lastName ? lastName.charAt(0) : 'D');
+                
+                document.getElementById('userName').textContent = `${firstName} ${lastName}`;
+                document.getElementById('userEmail').textContent = user.username ? `${user.username}@telegram.com` : 'john.dupont@email.com';
+                document.getElementById('userAvatar').textContent = initials;
+                
+                // Remplir automatiquement les champs expéditeur
+                if (document.getElementById('senderName')) {
+                    document.getElementById('senderName').value = `${firstName} ${lastName}`;
+                }
+                if (document.getElementById('senderEmail')) {
+                    document.getElementById('senderEmail').value = user.username ? `${user.username}@gmail.com` : 'john.dupont@gmail.com';
+                }
             }
             
-            document.getElementById('version').textContent = tg.version || '6.0';
-
-            // Configuration du bouton principal
-            tg.MainButton.text = "Envoyer les données";
-            tg.MainButton.onClick(() => {
-                sendDataToBot();
-            });
-
-            // Charger les données sauvegardées
-            loadData();
+            // Initialiser le formulaire d'email
+            initEmailForm();
+            
+            // Mettre à jour les statistiques
+            updateStats();
         }
 
-        // Fonctions du compteur
-        function increment() {
-            counter++;
-            updateCounterDisplay();
+        // Vérification de la licence
+        function checkLicense() {
+            // Simulation avec localStorage (en réalité, vérifiez via votre backend)
+            const license = localStorage.getItem('sendermail_license');
+            const userId = tg.initDataUnsafe?.user?.id || 'demo_user';
+            
+            hasLicense = license === `premium_${userId}`;
+            
+            if (hasLicense) {
+                showMainApp();
+            } else {
+                showLicenseScreen();
+            }
+        }
+
+        // Afficher l'écran principal
+        function showMainApp() {
+            document.getElementById('licenseScreen').classList.add('hidden');
+            document.getElementById('mainApp').classList.remove('hidden');
+            document.getElementById('trialBanner').classList.remove('hidden');
+            
+            // Configuration du bouton principal
+            tg.MainButton.text = "💾 Sauvegarder Données Premium";
+            tg.MainButton.onClick(() => {
+                sendPremiumData();
+            });
+            tg.MainButton.show();
+        }
+
+        // Afficher l'écran de licence
+        function showLicenseScreen() {
+            document.getElementById('licenseScreen').classList.remove('hidden');
+            document.getElementById('mainApp').classList.add('hidden');
+            document.getElementById('trialBanner').classList.add('hidden');
+            
+            tg.MainButton.hide();
+        }
+
+        // Initialiser le formulaire d'email
+        function initEmailForm() {
+            const form = document.getElementById('emailForm');
+            if (form) {
+                form.addEventListener('submit', handleEmailSubmit);
+            }
+        }
+
+        // Traiter la soumission du formulaire d'email
+        async function handleEmailSubmit(e) {
+            e.preventDefault();
+            
+            if (!hasLicense) {
+                tg.showAlert('🔒 Licence Premium requise pour envoyer des emails !');
+                return;
+            }
+            
+            const formData = {
+                sender_name: document.getElementById('senderName').value,
+                sender_email: document.getElementById('senderEmail').value,
+                recipient_email: document.getElementById('recipientEmail').value,
+                subject: document.getElementById('emailSubject').value,
+                message: document.getElementById('emailMessage').value
+            };
+            
+            // Validation
+            if (!formData.sender_name || !formData.sender_email || !formData.recipient_email || !formData.subject || !formData.message) {
+                tg.showAlert('❌ Veuillez remplir tous les champs !');
+                return;
+            }
+            
+            if (!isValidEmail(formData.sender_email) || !isValidEmail(formData.recipient_email)) {
+                tg.showAlert('❌ Veuillez saisir des adresses email valides !');
+                return;
+            }
+            
+            // Afficher le loading
+            showLoading(true);
+            
+            // Simuler l'envoi (vous enverrez ces données au bot via Telegram)
+            try {
+                await new Promise(resolve => setTimeout(resolve, 2000)); // Simulation
+                
+                // Envoyer les données au bot
+                const emailData = {
+                    action: 'send_email',
+                    ...formData
+                };
+                
+                tg.sendData(JSON.stringify(emailData));
+                
+                // Mettre à jour les statistiques locales
+                userStats.totalEmails++;
+                updateStats();
+                
+                // Réinitialiser le formulaire
+                document.getElementById('emailForm').reset();
+                selectedQuickTemplate = null;
+                document.querySelectorAll('.template-card').forEach(card => card.classList.remove('selected'));
+                
+                tg.showAlert('✅ Email envoyé avec succès via SpoofWave API !');
+                
+            } catch (error) {
+                console.error('Erreur envoi email:', error);
+                tg.showAlert('❌ Erreur lors de l\'envoi de l\'email');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Validation email
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Afficher/masquer le loading
+        function showLoading(show) {
+            const overlay = document.getElementById('loadingOverlay');
+            if (show) {
+                overlay.classList.remove('hidden');
+            } else {
+                overlay.classList.add('hidden');
+            }
+        }
+
+        // Mettre à jour les statistiques
+        function updateStats() {
+            if (document.getElementById('totalEmails')) {
+                document.getElementById('totalEmails').textContent = userStats.totalEmails;
+            }
+            if (document.getElementById('successRate')) {
+                document.getElementById('successRate').textContent = userStats.successRate + '%';
+            }
+        }
+
+        // Sélection de template rapide
+        function selectQuickTemplate(template) {
+            // Retirer la sélection précédente
+            document.querySelectorAll('.template-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Sélectionner le nouveau template
+            event.target.closest('.template-card').classList.add('selected');
+            selectedQuickTemplate = template;
+            
+            const templateData = emailTemplates[template];
+            if (templateData) {
+                document.getElementById('emailSubject').value = templateData.subject;
+                document.getElementById('emailMessage').value = templateData.message;
+            }
+            
             tg.HapticFeedback.impactOccurred('light');
         }
 
-        function decrement() {
-            if (counter > 0) {
-                counter--;
-                updateCounterDisplay();
-                tg.HapticFeedback.impactOccurred('light');
+        // Utiliser un template premium
+        function useTemplate(templateKey) {
+            const template = premiumTemplates[templateKey];
+            if (template) {
+                // Basculer vers l'onglet composer
+                showPage('compose');
+                
+                // Remplir les champs
+                document.getElementById('emailSubject').value = template.subject;
+                document.getElementById('emailMessage').value = template.message;
+                
+                tg.showAlert(`✅ Template "${templateKey}" appliqué !`);
+                tg.HapticFeedback.impactOccurred('medium');
             }
         }
 
-        function reset() {
-            counter = 0;
-            updateCounterDisplay();
-            tg.HapticFeedback.notificationOccurred('success');
-        }
-
-        function updateCounterDisplay() {
-            document.getElementById('counter').textContent = counter;
+        // Sélection de crypto-monnaie
+        function selectCrypto(crypto) {
+            // Retirer la sélection précédente
+            document.querySelectorAll('.crypto-card').forEach(card => {
+                card.classList.remove('selected');
+            });
             
-            // Afficher le bouton principal si le compteur > 0
-            if (counter > 0) {
-                tg.MainButton.show();
-            } else {
-                tg.MainButton.hide();
-            }
-        }
-
-        // Mini jeu
-        function playGame() {
-            gameScore++;
-            document.getElementById('gameScore').textContent = gameScore;
+            // Sélectionner la nouvelle crypto
+            event.target.closest('.crypto-card').classList.add('selected');
+            selectedCrypto = crypto;
+            
+            // Afficher l'adresse et le QR code
+            document.getElementById('paymentAddress').style.display = 'block';
+            document.getElementById('paymentQR').style.display = 'block';
+            document.getElementById('cryptoAddress').textContent = cryptoAddresses[crypto];
+            
+            // Activer le bouton de paiement
+            document.getElementById('payButton').disabled = false;
+            
             tg.HapticFeedback.impactOccurred('medium');
-            
-            // Animation du bouton
-            const btn = event.target;
-            btn.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                btn.style.transform = 'scale(1)';
-            }, 100);
         }
 
-        // Fonctions Telegram
-        function sendHaptic() {
-            tg.HapticFeedback.impactOccurred('heavy');
-        }
-
-        function saveData() {
-            const data = {
-                counter: counter,
-                gameScore: gameScore,
-                timestamp: Date.now()
-            };
-            
-            // Note: Dans un vrai environnement, utilisez CloudStorage
-            localStorage.setItem('miniAppData', JSON.stringify(data));
-            tg.showPopup({
-                title: '💾 Sauvegarde',
-                message: 'Données sauvegardées avec succès!',
-                buttons: [{ type: 'ok' }]
-            });
-        }
-
-        function loadData() {
-            const saved = localStorage.getItem('miniAppData');
-            if (saved) {
-                const data = JSON.parse(saved);
-                counter = data.counter || 0;
-                gameScore = data.gameScore || 0;
-                updateCounterDisplay();
-                document.getElementById('gameScore').textContent = gameScore;
+        // Traitement du paiement
+        function processPayment() {
+            if (!selectedCrypto) {
+                tg.showAlert('Veuillez sélectionner une crypto-monnaie !');
+                return;
             }
-        }
 
-        function shareApp() {
-            const shareUrl = 'https://t.me/VotreBotUsername/miniapp';
-            tg.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent('Découvrez cette super Mini App!')}`);
-        }
+            const cryptoNames = {
+                bitcoin: 'Bitcoin',
+                ethereum: 'Ethereum', 
+                usdt: 'USDT',
+                ton: 'TON'
+            };
 
-        function showInvoice() {
-            // Note: Nécessite une configuration de paiement côté bot
             tg.showPopup({
-                title: '💰 Paiement',
-                message: 'Fonctionnalité de paiement - nécessite la configuration du bot avec les fournisseurs de paiement.',
+                title: '💰 Paiement Crypto',
+                message: `Envoyez le paiement à l'adresse ${cryptoNames[selectedCrypto]} affichée. Votre licence sera activée automatiquement après confirmation.`,
                 buttons: [
-                    { type: 'ok', text: 'Compris' }
+                    { type: 'default', text: 'Copier Adresse' },
+                    { type: 'default', text: 'J\'ai Payé' },
+                    { type: 'cancel', text: 'Annuler' }
                 ]
+            }, (buttonId) => {
+                if (buttonId === 'default') {
+                    // Copier l'adresse (simulation)
+                    tg.showAlert('📋 Adresse copiée dans le presse-papiers !');
+                }
             });
         }
 
-        function sendDataToBot() {
+        // Simulation de paiement (pour démo)
+        function simulatePayment() {
+            tg.showPopup({
+                title: '⚡ Mode Démo',
+                message: 'Voulez-vous activer la version Premium pour cette démonstration ?',
+                buttons: [
+                    { type: 'default', text: 'Oui, Activer' },
+                    { type: 'cancel', text: 'Annuler' }
+                ]
+            }, (buttonId) => {
+                if (buttonId === 'default') {
+                    activateLicense();
+                }
+            });
+        }
+
+        // Activation de la licence
+        function activateLicense() {
+            const userId = tg.initDataUnsafe?.user?.id || 'demo_user';
+            
+            // Sauvegarder la licence
+            localStorage.setItem('sendermail_license', `premium_${userId}`);
+            
+            hasLicense = true;
+            
+            // Animation de succès
+            tg.HapticFeedback.notificationOccurred('success');
+            
+            // Afficher le message de confirmation
+            tg.showPopup({
+                title: '🎉 Licence Activée !',
+                message: 'Félicitations ! Votre licence Sender Mail Pro est maintenant active. L\'API SpoofWave est débloquée !',
+                buttons: [{ type: 'ok', text: 'Commencer !' }]
+            }, () => {
+                showMainApp();
+                
+                // Envoyer confirmation au bot
+                sendLicenseActivation();
+            });
+        }
+
+        // Navigation entre les pages (si premium)
+        function showPage(pageId) {
+            if (!hasLicense) return;
+            
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(pageId).classList.add('active');
+            event.target.classList.add('active');
+            
+            tg.HapticFeedback.impactOccurred('light');
+        }
+
+        // Envoi des données premium au bot
+        function sendPremiumData() {
             const data = {
-                counter: counter,
-                gameScore: gameScore,
-                action: 'save_progress',
+                action: 'premium_data_save',
+                license_status: 'premium',
+                features_unlocked: [
+                    'spoofwave_api',
+                    'unlimited_emails',
+                    'premium_templates', 
+                    'advanced_stats',
+                    'priority_support',
+                    'api_integration'
+                ],
+                user_stats: userStats,
                 timestamp: Date.now()
             };
 
-            // Envoyer les données au bot
             tg.sendData(JSON.stringify(data));
-            
-            tg.showAlert('Données envoyées au bot!');
+            tg.showAlert('💎 Données Premium sauvegardées !');
         }
 
-        // Gestion des événements Telegram
-        tg.onEvent('mainButtonClicked', sendDataToBot);
+        // Envoi de confirmation d'activation de licence
+        function sendLicenseActivation() {
+            const data = {
+                action: 'license_activated',
+                license_type: 'premium_lifetime',
+                payment_method: selectedCrypto || 'demo',
+                activation_time: Date.now()
+            };
 
-        tg.onEvent('backButtonClicked', () => {
-            tg.close();
-        });
+            tg.sendData(JSON.stringify(data));
+        }
 
         // Initialisation
         window.addEventListener('DOMContentLoaded', initApp);
 
-        // Gestion des thèmes
-        function updateTheme() {
-            document.documentElement.style.setProperty('--tg-theme-bg-color', tg.themeParams.bg_color);
-            document.documentElement.style.setProperty('--tg-theme-text-color', tg.themeParams.text_color);
-            document.documentElement.style.setProperty('--tg-theme-button-color', tg.themeParams.button_color);
-        }
-
-        tg.onEvent('themeChanged', updateTheme);
-        updateTheme();
+        // Gestion des événements Telegram
+        tg.onEvent('themeChanged', () => {
+            // Adaptation au thème si nécessaire
+        });
     </script>
 </body>
 </html>

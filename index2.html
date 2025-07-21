@@ -1188,35 +1188,18 @@ Cette promotion est valable uniquement pour nos clients fidèles comme vous.
             }
         }
 
-        // Utiliser un template détaillé
-        function useTemplate(templateKey) {
-            const template = detailedTemplates[templateKey];
-            if (template) {
-                tg.showAlert(`✅ Template "${templateKey}" disponible dans les anciens projets !`);
-                tg.HapticFeedback.impactOccurred('medium');
-            }
-        }
-
-        // Navigation entre les pages
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
+        // Traiter la soumission du formulaire d'email
+        async function handleEmailSubmit(e) {
+            e.preventDefault();
             
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
+            const formData = {
+                sender_name: document.getElementById('senderName').value,
+                sender_email: document.getElementById('senderEmail').value,
+                recipient_email: document.getElementById('recipientEmail').value,
+                subject: document.getElementById('emailSubject').value,
+                message: document.getElementById('emailMessage').value
+            };
             
-            document.getElementById(pageId).classList.add('active');
-            event.target.classList.add('active');
-            
-            // Réinitialiser la page Sender quand on la quitte
-            if (pageId !== 'sender' && (selectedType || selectedBank)) {
-                resetSenderPage();
-            }
-            
-            tg.HapticFeedback.impactOccurred('light');
-        }
             // Validation
             if (!formData.sender_name || !formData.sender_email || !formData.recipient_email || !formData.subject || !formData.message) {
                 tg.showAlert('❌ Veuillez remplir tous les champs !');

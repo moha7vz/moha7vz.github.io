@@ -942,16 +942,11 @@
                     <div class="profile-avatar" id="userAvatar">JD</div>
                     <div class="profile-info">
                         <h3 id="userName">John Dupont</h3>
-                        <div class="email" id="userEmail">john.dupont@email.com</div>
                         <div class="status">
                             <div class="status-dot"></div>
-                            Service Actif • ASUS Technology
+                            Abonnement actif
                         </div>
                     </div>
-                </div>
-                <div class="profile-details">
-                    <span>📞 +33 6 12 34 56 78</span>
-                    <span>📍 Paris, France</span>
                 </div>
             </div>
 
@@ -1004,7 +999,7 @@
                     <div class="bank-grid">
                         <div class="bank-card" onclick="selectBank('sg')">
                             <div class="bank-logo sg style1">
-                                <img src="templogo/sg.png" alt="Société Générale" onerror="this.style.display='none'; this.parentNode.innerHTML='SG';">
+                                <img src="sg.png" alt="Société Générale" onerror="this.style.display='none'; this.parentNode.innerHTML='SG';">
                             </div>
                             <div class="bank-name">Société Générale</div>
                         </div>
@@ -1016,7 +1011,7 @@
                         </div>
                         <div class="bank-card" onclick="selectBank('ca')">
                             <div class="bank-logo ca style1">
-                                <img src="templogo/ca.png" alt="Crédit Agricole" onerror="this.style.display='none'; this.parentNode.innerHTML='CA';">
+                                <img src="ca.png" alt="Crédit Agricole" onerror="this.style.display='none'; this.parentNode.innerHTML='CA';">
                             </div>
                             <div class="bank-name">Crédit Agricole</div>
                         </div>
@@ -1034,7 +1029,7 @@
                         </div>
                         <div class="bank-card" onclick="selectBank('postale')">
                             <div class="bank-logo postale style2">
-                                <img src="templogo/lbp.png" alt="La Banque Postale" onerror="this.style.display='none'; this.parentNode.innerHTML='BP';">
+                                <img src="lbp.png" alt="La Banque Postale" onerror="this.style.display='none'; this.parentNode.innerHTML='BP';">
                             </div>
                             <div class="bank-name">Banque Postale</div>
                         </div>
@@ -1046,7 +1041,7 @@
                     <div class="section-title">Informations Conseiller</div>
                     <div class="bank-selected" id="selectedBankInfo">
                         <div class="bank-logo-large sg style1">
-                            <img src="templogo/sg.png" alt="Société Générale" onerror="this.style.display='none'; this.parentNode.innerHTML='SG';">
+                            <img src="sg.png" alt="Société Générale" onerror="this.style.display='none'; this.parentNode.innerHTML='SG';">
                         </div>
                         <div class="bank-details">
                             <h3 id="selectedBankName">Société Générale</h3>
@@ -1195,12 +1190,11 @@
             // Configuration des informations utilisateur
             const user = tg.initDataUnsafe?.user;
             if (user) {
-                const firstName = user.first_name || 'John';
-                const lastName = user.last_name || 'Dupont';
-                const initials = firstName.charAt(0) + (lastName ? lastName.charAt(0) : 'D');
+                // Utiliser le username ou first_name pour le pseudo
+                const displayName = user.username ? `@${user.username}` : (user.first_name || 'User');
+                const initials = user.first_name ? user.first_name.charAt(0) + (user.last_name ? user.last_name.charAt(0) : '') : 'U';
                 
-                document.getElementById('userName').textContent = `${firstName} ${lastName}`;
-                document.getElementById('userEmail').textContent = user.username ? `${user.username}@telegram.com` : 'john.dupont@email.com';
+                document.getElementById('userName').textContent = displayName;
                 document.getElementById('userAvatar').textContent = initials;
             }
             

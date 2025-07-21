@@ -48,169 +48,6 @@
             opacity: 0.9;
         }
 
-        .header .price {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.2);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-
-        .header .license-status {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255,255,255,0.2);
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .header .license-status.premium {
-            background: #ffd700;
-            color: #000;
-        }
-
-        /* License Screen */
-        .license-screen {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .lock-icon {
-            font-size: 80px;
-            margin: 40px 0;
-            opacity: 0.5;
-        }
-
-        .license-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px 20px;
-            margin: 20px 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            border: 2px solid #e8eaed;
-        }
-
-        .license-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #202124;
-        }
-
-        .license-price {
-            font-size: 36px;
-            font-weight: bold;
-            color: #4285f4;
-            margin: 20px 0;
-        }
-
-        .license-features {
-            text-align: left;
-            margin: 20px 0;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 0;
-            font-size: 14px;
-        }
-
-        .feature-check {
-            color: #34a853;
-            font-weight: bold;
-        }
-
-        /* Crypto Payment */
-        .crypto-section {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .crypto-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            text-align: center;
-            color: #202124;
-        }
-
-        .crypto-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .crypto-card {
-            background: white;
-            border: 2px solid #e8eaed;
-            border-radius: 15px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .crypto-card:hover {
-            border-color: #4285f4;
-            transform: translateY(-2px);
-        }
-
-        .crypto-card.selected {
-            border-color: #4285f4;
-            background: #f8f9ff;
-        }
-
-        .crypto-icon {
-            font-size: 30px;
-            margin-bottom: 8px;
-        }
-
-        .crypto-name {
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .crypto-amount {
-            font-size: 14px;
-            color: #5f6368;
-        }
-
-        .payment-address {
-            background: #202124;
-            color: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            word-break: break-all;
-            margin: 15px 0;
-            display: none;
-        }
-
-        .payment-qr {
-            width: 200px;
-            height: 200px;
-            background: #f0f0f0;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 15px auto;
-            font-size: 14px;
-            color: #666;
-            display: none;
-        }
-
         /* Navigation */
         .nav-tabs {
             display: flex;
@@ -236,11 +73,6 @@
             color: white;
             box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
             opacity: 1;
-        }
-
-        .nav-tab.disabled {
-            cursor: not-allowed;
-            opacity: 0.3;
         }
 
         /* Page Content */
@@ -373,7 +205,7 @@
         .stat-icon.emails { background: #4285f4; }
         .stat-icon.templates { background: #7c4dff; }
         .stat-icon.success { background: #00c853; }
-        .stat-icon.contacts { background: #ff6d00; }
+        .stat-icon.api { background: #ff6d00; }
 
         .stat-number {
             font-size: 24px;
@@ -501,44 +333,9 @@
             transform: none;
         }
 
-        .btn-success {
-            background: #34a853;
-            color: white;
-            box-shadow: 0 2px 8px rgba(52, 168, 83, 0.3);
-        }
-
-        .btn-crypto {
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            color: white;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 107, 53, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0); }
-        }
-
         .btn-block {
             width: 100%;
             margin-bottom: 10px;
-        }
-
-        /* Trial Banner */
-        .trial-banner {
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 15px;
-            margin: 0 20px 20px 20px;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .trial-timer {
-            font-size: 18px;
-            margin-top: 5px;
         }
 
         /* Footer */
@@ -548,22 +345,6 @@
             margin-top: 40px;
             color: #5f6368;
             font-size: 12px;
-        }
-
-        /* Hide elements */
-        .hidden {
-            display: none !important;
-        }
-
-        /* Premium badge */
-        .premium-badge {
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            color: #000;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-left: 10px;
         }
 
         /* Loading and alerts */
@@ -601,7 +382,7 @@
             margin-bottom: 30px;
         }
 
-        .premium-templates {
+        .templates-grid {
             display: grid;
             gap: 15px;
         }
@@ -656,314 +437,218 @@
             border-radius: 12px;
             font-size: 11px;
         }
+
+        /* Hide elements */
+        .hidden {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
     <div class="app-container">
-        <!-- License Screen -->
-        <div id="licenseScreen" class="license-screen">
-            <div class="header">
-                <div class="license-status" id="licenseStatus">🔒 Version Gratuite</div>
-                <div class="price">€235.2</div>
-                <h1>📧 Sender Mail Pro</h1>
-                <div class="subtitle">Version Professionnelle Premium</div>
+        <!-- Header -->
+        <div class="header">
+            <h1>📧 Sender Mail Pro</h1>
+            <div class="subtitle">SpoofWave API • Interface Professionnelle</div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showPage('dashboard')">
+                📊 Dashboard
             </div>
-
-            <div class="lock-icon">🔐</div>
-            
-            <div class="license-card">
-                <div class="license-title">Débloquer Sender Mail Pro</div>
-                <div class="license-price">0.005 BTC</div>
-                <div style="text-align: center; color: #5f6368; margin-bottom: 20px;">~€235.2</div>
-                
-                <div class="license-features">
-                    <div class="feature-item">
-                        <span class="feature-check">✅</span>
-                        <span>Envois d'emails illimités via SpoofWave</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-check">✅</span>
-                        <span>Templates premium avancés</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-check">✅</span>
-                        <span>Statistiques détaillées</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-check">✅</span>
-                        <span>Support prioritaire 24/7</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-check">✅</span>
-                        <span>API SpoofWave intégrée</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-check">✅</span>
-                        <span>Licence à vie</span>
-                    </div>
-                </div>
+            <div class="nav-tab" onclick="showPage('compose')">
+                ✍️ Composer
             </div>
-
-            <!-- Crypto Payment Section -->
-            <div class="crypto-section">
-                <div class="crypto-title">💰 Choisissez votre crypto-monnaie</div>
-                
-                <div class="crypto-options">
-                    <div class="crypto-card" onclick="selectCrypto('bitcoin')">
-                        <div class="crypto-icon">₿</div>
-                        <div class="crypto-name">Bitcoin</div>
-                        <div class="crypto-amount">0.005 BTC</div>
-                    </div>
-                    <div class="crypto-card" onclick="selectCrypto('ethereum')">
-                        <div class="crypto-icon">Ξ</div>
-                        <div class="crypto-name">Ethereum</div>
-                        <div class="crypto-amount">0.12 ETH</div>
-                    </div>
-                    <div class="crypto-card" onclick="selectCrypto('usdt')">
-                        <div class="crypto-icon">₮</div>
-                        <div class="crypto-name">USDT</div>
-                        <div class="crypto-amount">235.2 USDT</div>
-                    </div>
-                    <div class="crypto-card" onclick="selectCrypto('ton')">
-                        <div class="crypto-icon">💎</div>
-                        <div class="crypto-name">TON</div>
-                        <div class="crypto-amount">120 TON</div>
-                    </div>
-                </div>
-
-                <div class="payment-address" id="paymentAddress">
-                    Adresse de paiement :<br>
-                    <span id="cryptoAddress">Sélectionnez une crypto-monnaie</span>
-                </div>
-
-                <div class="payment-qr" id="paymentQR">
-                    QR Code de paiement
-                </div>
-
-                <button class="btn btn-crypto btn-block" id="payButton" onclick="processPayment()" disabled>
-                    🚀 Effectuer le Paiement
-                </button>
-                
-                <button class="btn btn-success btn-block" onclick="simulatePayment()">
-                    ⚡ Mode Démo (Simuler Paiement)
-                </button>
+            <div class="nav-tab" onclick="showPage('templates')">
+                📄 Templates
             </div>
         </div>
 
-        <!-- Trial Banner (shown when unlocked) -->
-        <div id="trialBanner" class="trial-banner hidden">
-            <div>🎉 Version Premium Activée !</div>
-            <div class="trial-timer" id="trialTimer">SpoofWave API • Envois illimités</div>
+        <!-- Dashboard Page -->
+        <div id="dashboard" class="page active">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar" id="userAvatar">JD</div>
+                    <div class="profile-info">
+                        <h3 id="userName">John Dupont</h3>
+                        <div class="email" id="userEmail">john.dupont@email.com</div>
+                        <div class="status">
+                            <div class="status-dot"></div>
+                            Service Actif • SpoofWave API
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-details">
+                    <span>📞 +33 6 12 34 56 78</span>
+                    <span>📍 Paris, France</span>
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <div class="section-title">Vos Statistiques</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon emails">📧</div>
+                        <div class="stat-number" id="totalEmails">0</div>
+                        <div class="stat-label">Emails Envoyés</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon templates">📄</div>
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">Templates Disponibles</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">✅</div>
+                        <div class="stat-number" id="successRate">100%</div>
+                        <div class="stat-label">Taux de Succès</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon api">🚀</div>
+                        <div class="stat-number">API</div>
+                        <div class="stat-label">SpoofWave Intégré</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Main App Content -->
-        <div id="mainApp" class="hidden">
-            <!-- Header -->
-            <div class="header">
-                <div class="license-status premium" id="premiumStatus">✨ Premium</div>
-                <div class="price">€235.2</div>
-                <h1>📧 Sender Mail Pro<span class="premium-badge">PREMIUM</span></h1>
-                <div class="subtitle">SpoofWave API • Version Débloquée</div>
-            </div>
-
-            <!-- Navigation -->
-            <div class="nav-tabs">
-                <div class="nav-tab active" onclick="showPage('dashboard')">
-                    📊 Dashboard
-                </div>
-                <div class="nav-tab" onclick="showPage('compose')">
-                    ✍️ Composer
-                </div>
-                <div class="nav-tab" onclick="showPage('templates')">
-                    📄 Templates
-                </div>
-            </div>
-
-            <!-- Dashboard Page -->
-            <div id="dashboard" class="page active">
-                <div class="profile-card">
-                    <div class="profile-header">
-                        <div class="profile-avatar" id="userAvatar">JD</div>
-                        <div class="profile-info">
-                            <h3 id="userName">John Dupont</h3>
-                            <div class="email" id="userEmail">john.dupont@email.com</div>
-                            <div class="status">
-                                <div class="status-dot"></div>
-                                Premium Actif • SpoofWave API
-                            </div>
+        <!-- Compose Page -->
+        <div id="compose" class="page">
+            <div class="stats-section">
+                <div class="section-title">Composer un Email</div>
+                
+                <div class="compose-form">
+                    <form id="emailForm">
+                        <div class="form-group">
+                            <label class="form-label">📤 Nom de l'expéditeur</label>
+                            <input type="text" class="form-input" id="senderName" placeholder="Votre nom" required>
                         </div>
-                    </div>
-                    <div class="profile-details">
-                        <span>📞 +33 6 12 34 56 78</span>
-                        <span>📍 Paris, France</span>
-                    </div>
-                </div>
 
-                <div class="stats-section">
-                    <div class="section-title">Statistiques Premium</div>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-icon emails">📧</div>
-                            <div class="stat-number" id="totalEmails">0</div>
-                            <div class="stat-label">Emails Envoyés</div>
+                        <div class="form-group">
+                            <label class="form-label">📧 Email expéditeur</label>
+                            <input type="email" class="form-input" id="senderEmail" placeholder="votre@email.com" required>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-icon templates">📄</div>
-                            <div class="stat-number">50+</div>
-                            <div class="stat-label">Templates Premium</div>
+
+                        <div class="form-group">
+                            <label class="form-label">👤 Email destinataire</label>
+                            <input type="email" class="form-input" id="recipientEmail" placeholder="destinataire@email.com" required>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-icon success">✅</div>
-                            <div class="stat-number" id="successRate">100%</div>
-                            <div class="stat-label">Taux de Succès</div>
+
+                        <div class="form-group">
+                            <label class="form-label">📝 Sujet</label>
+                            <input type="text" class="form-input" id="emailSubject" placeholder="Sujet de votre email" required>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-icon contacts">🚀</div>
-                            <div class="stat-number">∞</div>
-                            <div class="stat-label">API SpoofWave</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Compose Page -->
-            <div id="compose" class="page">
-                <div class="stats-section">
-                    <div class="section-title">Composer un Email</div>
-                    
-                    <div class="compose-form">
-                        <form id="emailForm">
-                            <div class="form-group">
-                                <label class="form-label">📤 Nom de l'expéditeur</label>
-                                <input type="text" class="form-input" id="senderName" placeholder="Votre nom" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">📧 Email expéditeur</label>
-                                <input type="email" class="form-input" id="senderEmail" placeholder="votre@email.com" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">👤 Email destinataire</label>
-                                <input type="email" class="form-input" id="recipientEmail" placeholder="destinataire@email.com" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">📝 Sujet</label>
-                                <input type="text" class="form-input" id="emailSubject" placeholder="Sujet de votre email" required>
-                            </div>
-
-                            <div class="template-selector">
-                                <label class="form-label">🎨 Template rapide (optionnel)</label>
-                                <div class="template-grid">
-                                    <div class="template-card" onclick="selectQuickTemplate('business')">
-                                        <span class="template-emoji">💼</span>
-                                        Business
-                                    </div>
-                                    <div class="template-card" onclick="selectQuickTemplate('marketing')">
-                                        <span class="template-emoji">📈</span>
-                                        Marketing
-                                    </div>
-                                    <div class="template-card" onclick="selectQuickTemplate('newsletter')">
-                                        <span class="template-emoji">📰</span>
-                                        Newsletter
-                                    </div>
-                                    <div class="template-card" onclick="selectQuickTemplate('personal')">
-                                        <span class="template-emoji">👋</span>
-                                        Personnel
-                                    </div>
+                        <div class="template-selector">
+                            <label class="form-label">🎨 Template rapide (optionnel)</label>
+                            <div class="template-grid">
+                                <div class="template-card" onclick="selectQuickTemplate('business')">
+                                    <span class="template-emoji">💼</span>
+                                    Business
+                                </div>
+                                <div class="template-card" onclick="selectQuickTemplate('marketing')">
+                                    <span class="template-emoji">📈</span>
+                                    Marketing
+                                </div>
+                                <div class="template-card" onclick="selectQuickTemplate('newsletter')">
+                                    <span class="template-emoji">📰</span>
+                                    Newsletter
+                                </div>
+                                <div class="template-card" onclick="selectQuickTemplate('personal')">
+                                    <span class="template-emoji">👋</span>
+                                    Personnel
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="form-label">💬 Message</label>
-                                <textarea class="form-input form-textarea" id="emailMessage" placeholder="Votre message..." required></textarea>
-                            </div>
+                        <div class="form-group">
+                            <label class="form-label">💬 Message</label>
+                            <textarea class="form-input form-textarea" id="emailMessage" placeholder="Votre message..." required></textarea>
+                        </div>
 
-                            <button type="submit" class="btn btn-primary btn-block" id="sendButton">
-                                🚀 Envoyer via SpoofWave API
-                            </button>
-                        </form>
-                    </div>
+                        <button type="submit" class="btn btn-primary btn-block" id="sendButton">
+                            🚀 Envoyer via SpoofWave API
+                        </button>
+                    </form>
                 </div>
             </div>
+        </div>
 
-            <!-- Templates Page -->
-            <div id="templates" class="page">
-                <div class="templates-section">
-                    <div class="section-title">Templates Premium</div>
-                    
-                    <div class="premium-templates">
-                        <div class="template-item" onclick="useTemplate('business-proposal')">
-                            <div class="template-header">
-                                <span class="template-icon">💼</span>
-                                <span class="template-name">Proposition Business</span>
-                            </div>
-                            <div class="template-description">Template professionnel pour les propositions commerciales</div>
-                            <div class="template-tags">
-                                <span class="template-tag">Business</span>
-                                <span class="template-tag">Professionnel</span>
-                            </div>
+        <!-- Templates Page -->
+        <div id="templates" class="page">
+            <div class="templates-section">
+                <div class="section-title">Templates Disponibles</div>
+                
+                <div class="templates-grid">
+                    <div class="template-item" onclick="useTemplate('business-proposal')">
+                        <div class="template-header">
+                            <span class="template-icon">💼</span>
+                            <span class="template-name">Proposition Business</span>
                         </div>
-
-                        <div class="template-item" onclick="useTemplate('marketing-campaign')">
-                            <div class="template-header">
-                                <span class="template-icon">📈</span>
-                                <span class="template-name">Campagne Marketing</span>
-                            </div>
-                            <div class="template-description">Template optimisé pour les campagnes marketing</div>
-                            <div class="template-tags">
-                                <span class="template-tag">Marketing</span>
-                                <span class="template-tag">Conversion</span>
-                            </div>
+                        <div class="template-description">Template professionnel pour les propositions commerciales</div>
+                        <div class="template-tags">
+                            <span class="template-tag">Business</span>
+                            <span class="template-tag">Professionnel</span>
                         </div>
+                    </div>
 
-                        <div class="template-item" onclick="useTemplate('newsletter')">
-                            <div class="template-header">
-                                <span class="template-icon">📰</span>
-                                <span class="template-name">Newsletter Premium</span>
-                            </div>
-                            <div class="template-description">Design moderne pour newsletters engageantes</div>
-                            <div class="template-tags">
-                                <span class="template-tag">Newsletter</span>
-                                <span class="template-tag">Engagement</span>
-                            </div>
+                    <div class="template-item" onclick="useTemplate('marketing-campaign')">
+                        <div class="template-header">
+                            <span class="template-icon">📈</span>
+                            <span class="template-name">Campagne Marketing</span>
                         </div>
-
-                        <div class="template-item" onclick="useTemplate('follow-up')">
-                            <div class="template-header">
-                                <span class="template-icon">🔄</span>
-                                <span class="template-name">Email de Suivi</span>
-                            </div>
-                            <div class="template-description">Template pour les emails de relance professionnelle</div>
-                            <div class="template-tags">
-                                <span class="template-tag">Suivi</span>
-                                <span class="template-tag">Relance</span>
-                            </div>
+                        <div class="template-description">Template optimisé pour les campagnes marketing</div>
+                        <div class="template-tags">
+                            <span class="template-tag">Marketing</span>
+                            <span class="template-tag">Conversion</span>
                         </div>
+                    </div>
 
-                        <div class="template-item" onclick="useTemplate('welcome')">
-                            <div class="template-header">
-                                <span class="template-icon">👋</span>
-                                <span class="template-name">Email de Bienvenue</span>
-                            </div>
-                            <div class="template-description">Parfait pour accueillir de nouveaux clients</div>
-                            <div class="template-tags">
-                                <span class="template-tag">Bienvenue</span>
-                                <span class="template-tag">Onboarding</span>
-                            </div>
+                    <div class="template-item" onclick="useTemplate('newsletter')">
+                        <div class="template-header">
+                            <span class="template-icon">📰</span>
+                            <span class="template-name">Newsletter</span>
                         </div>
+                        <div class="template-description">Design moderne pour newsletters engageantes</div>
+                        <div class="template-tags">
+                            <span class="template-tag">Newsletter</span>
+                            <span class="template-tag">Engagement</span>
+                        </div>
+                    </div>
 
-                        <div class="template-item" onclick="useTemplate('promotion')">
-                            <div class="template-header">
-                                <span class="template-icon">🎉</span>
-                                <span class="template-name">Email Promotionnel</span>
-                            </div>
-                            <div class="template-description">Template attrayant pour les promotions et offres</div>
-                            <div class="template-tags">
-                                <span class="template-tag">Promotion</span>
-                                <span class="template-tag">Vente</span>
-                            </div>
+                    <div class="template-item" onclick="useTemplate('follow-up')">
+                        <div class="template-header">
+                            <span class="template-icon">🔄</span>
+                            <span class="template-name">Email de Suivi</span>
+                        </div>
+                        <div class="template-description">Template pour les emails de relance professionnelle</div>
+                        <div class="template-tags">
+                            <span class="template-tag">Suivi</span>
+                            <span class="template-tag">Relance</span>
+                        </div>
+                    </div>
+
+                    <div class="template-item" onclick="useTemplate('welcome')">
+                        <div class="template-header">
+                            <span class="template-icon">👋</span>
+                            <span class="template-name">Email de Bienvenue</span>
+                        </div>
+                        <div class="template-description">Parfait pour accueillir de nouveaux clients</div>
+                        <div class="template-tags">
+                            <span class="template-tag">Bienvenue</span>
+                            <span class="template-tag">Onboarding</span>
+                        </div>
+                    </div>
+
+                    <div class="template-item" onclick="useTemplate('promotion')">
+                        <div class="template-header">
+                            <span class="template-icon">🎉</span>
+                            <span class="template-name">Email Promotionnel</span>
+                        </div>
+                        <div class="template-description">Template attrayant pour les promotions et offres</div>
+                        <div class="template-tags">
+                            <span class="template-tag">Promotion</span>
+                            <span class="template-tag">Vente</span>
                         </div>
                     </div>
                 </div>
@@ -978,7 +663,7 @@
 
         <!-- Footer -->
         <div class="footer">
-            <p>💼 Sender Mail Pro v2.1 Premium</p>
+            <p>💼 Sender Mail Pro v2.1</p>
             <p>@SenderMailBot - SpoofWave API Integration</p>
         </div>
     </div>
@@ -986,17 +671,7 @@
     <script>
         // Variables globales
         let tg = window.Telegram.WebApp;
-        let hasLicense = false;
-        let selectedCrypto = null;
         let selectedQuickTemplate = null;
-
-        // Adresses crypto pour les paiements
-        const cryptoAddresses = {
-            bitcoin: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
-            ethereum: '0x742C4B4F0F1b0C3e4C3fF4Aaf2F2F0F0F0F0F0F0',
-            usdt: 'TQrZ4KjZjgZ4j4j4j4j4j4j4j4j4j4j4j4',
-            ton: 'EQDtFpEwcFAEcRe5mLVh2N6C4D-YrAqp3f3f3f3f3f'
-        };
 
         // Templates prédéfinis
         const emailTemplates = {
@@ -1050,8 +725,8 @@ Bonne journée !`
             }
         };
 
-        // Templates premium détaillés
-        const premiumTemplates = {
+        // Templates détaillés
+        const detailedTemplates = {
             'business-proposal': {
                 subject: "Proposition de collaboration stratégique",
                 message: `Bonjour [NOM],
@@ -1106,6 +781,65 @@ Voici votre résumé hebdomadaire personnalisé :
 Guide PDF exclusif en pièce jointe
 
 L'équipe`
+            },
+            'follow-up': {
+                subject: "Suite à notre échange - Prochaines étapes",
+                message: `Bonjour [NOM],
+
+Suite à notre conversation d'hier, je souhaitais faire un point sur les prochaines étapes.
+
+RÉSUMÉ DE NOS ÉCHANGES :
+• Point 1 discuté
+• Point 2 à approfondir
+• Décision à prendre sur...
+
+ACTIONS PROPOSÉES :
+1. [Action 1]
+2. [Action 2]
+3. [Action 3]
+
+N'hésitez pas à me faire savoir si vous avez des questions.
+
+Cordialement,`
+            },
+            'welcome': {
+                subject: "Bienvenue dans notre communauté ! 🎉",
+                message: `Bonjour [PRÉNOM],
+
+Bienvenue et merci de nous avoir rejoint !
+
+🎯 VOS PREMIERS PAS :
+1. Découvrez votre espace personnel
+2. Consultez notre guide de démarrage
+3. Rejoignez notre communauté
+
+🎁 BONUS DE BIENVENUE :
+• Accès gratuit pendant 30 jours
+• Templates exclusifs
+• Support prioritaire
+
+Si vous avez des questions, nous sommes là pour vous aider !
+
+L'équipe`
+            },
+            'promotion': {
+                subject: "🎉 Promotion exceptionnelle - 48h seulement !",
+                message: `Bonjour [PRÉNOM],
+
+Une promotion exceptionnelle vous attend !
+
+🔥 OFFRE LIMITÉE :
+• -70% sur tous nos produits
+• Livraison offerte
+• Garantie satisfait ou remboursé
+
+⏰ ATTENTION : Plus que 48h pour en profiter !
+
+Cette promotion est valable uniquement pour nos clients fidèles comme vous.
+
+[BOUTON: Profiter de l'offre]
+
+À très bientôt !`
             }
         };
 
@@ -1120,12 +854,9 @@ L'équipe`
             tg.ready();
             tg.expand();
             
-            // Vérification de la licence (simulation avec localStorage)
-            checkLicense();
-            
             // Configuration des informations utilisateur
             const user = tg.initDataUnsafe?.user;
-            if (user && hasLicense) {
+            if (user) {
                 const firstName = user.first_name || 'John';
                 const lastName = user.last_name || 'Dupont';
                 const initials = firstName.charAt(0) + (lastName ? lastName.charAt(0) : 'D');
@@ -1148,44 +879,13 @@ L'équipe`
             
             // Mettre à jour les statistiques
             updateStats();
-        }
-
-        // Vérification de la licence
-        function checkLicense() {
-            // Simulation avec localStorage (en réalité, vérifiez via votre backend)
-            const license = localStorage.getItem('sendermail_license');
-            const userId = tg.initDataUnsafe?.user?.id || 'demo_user';
-            
-            hasLicense = license === `premium_${userId}`;
-            
-            if (hasLicense) {
-                showMainApp();
-            } else {
-                showLicenseScreen();
-            }
-        }
-
-        // Afficher l'écran principal
-        function showMainApp() {
-            document.getElementById('licenseScreen').classList.add('hidden');
-            document.getElementById('mainApp').classList.remove('hidden');
-            document.getElementById('trialBanner').classList.remove('hidden');
             
             // Configuration du bouton principal
-            tg.MainButton.text = "💾 Sauvegarder Données Premium";
+            tg.MainButton.text = "💾 Sauvegarder Session";
             tg.MainButton.onClick(() => {
-                sendPremiumData();
+                saveSessionData();
             });
             tg.MainButton.show();
-        }
-
-        // Afficher l'écran de licence
-        function showLicenseScreen() {
-            document.getElementById('licenseScreen').classList.remove('hidden');
-            document.getElementById('mainApp').classList.add('hidden');
-            document.getElementById('trialBanner').classList.add('hidden');
-            
-            tg.MainButton.hide();
         }
 
         // Initialiser le formulaire d'email
@@ -1199,11 +899,6 @@ L'équipe`
         // Traiter la soumission du formulaire d'email
         async function handleEmailSubmit(e) {
             e.preventDefault();
-            
-            if (!hasLicense) {
-                tg.showAlert('🔒 Licence Premium requise pour envoyer des emails !');
-                return;
-            }
             
             const formData = {
                 sender_name: document.getElementById('senderName').value,
@@ -1227,7 +922,7 @@ L'équipe`
             // Afficher le loading
             showLoading(true);
             
-            // Simuler l'envoi (vous enverrez ces données au bot via Telegram)
+            // Simuler l'envoi
             try {
                 await new Promise(resolve => setTimeout(resolve, 2000)); // Simulation
                 
@@ -1304,9 +999,9 @@ L'équipe`
             tg.HapticFeedback.impactOccurred('light');
         }
 
-        // Utiliser un template premium
+        // Utiliser un template détaillé
         function useTemplate(templateKey) {
-            const template = premiumTemplates[templateKey];
+            const template = detailedTemplates[templateKey];
             if (template) {
                 // Basculer vers l'onglet composer
                 showPage('compose');
@@ -1320,103 +1015,8 @@ L'équipe`
             }
         }
 
-        // Sélection de crypto-monnaie
-        function selectCrypto(crypto) {
-            // Retirer la sélection précédente
-            document.querySelectorAll('.crypto-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-            
-            // Sélectionner la nouvelle crypto
-            event.target.closest('.crypto-card').classList.add('selected');
-            selectedCrypto = crypto;
-            
-            // Afficher l'adresse et le QR code
-            document.getElementById('paymentAddress').style.display = 'block';
-            document.getElementById('paymentQR').style.display = 'block';
-            document.getElementById('cryptoAddress').textContent = cryptoAddresses[crypto];
-            
-            // Activer le bouton de paiement
-            document.getElementById('payButton').disabled = false;
-            
-            tg.HapticFeedback.impactOccurred('medium');
-        }
-
-        // Traitement du paiement
-        function processPayment() {
-            if (!selectedCrypto) {
-                tg.showAlert('Veuillez sélectionner une crypto-monnaie !');
-                return;
-            }
-
-            const cryptoNames = {
-                bitcoin: 'Bitcoin',
-                ethereum: 'Ethereum', 
-                usdt: 'USDT',
-                ton: 'TON'
-            };
-
-            tg.showPopup({
-                title: '💰 Paiement Crypto',
-                message: `Envoyez le paiement à l'adresse ${cryptoNames[selectedCrypto]} affichée. Votre licence sera activée automatiquement après confirmation.`,
-                buttons: [
-                    { type: 'default', text: 'Copier Adresse' },
-                    { type: 'default', text: 'J\'ai Payé' },
-                    { type: 'cancel', text: 'Annuler' }
-                ]
-            }, (buttonId) => {
-                if (buttonId === 'default') {
-                    // Copier l'adresse (simulation)
-                    tg.showAlert('📋 Adresse copiée dans le presse-papiers !');
-                }
-            });
-        }
-
-        // Simulation de paiement (pour démo)
-        function simulatePayment() {
-            tg.showPopup({
-                title: '⚡ Mode Démo',
-                message: 'Voulez-vous activer la version Premium pour cette démonstration ?',
-                buttons: [
-                    { type: 'default', text: 'Oui, Activer' },
-                    { type: 'cancel', text: 'Annuler' }
-                ]
-            }, (buttonId) => {
-                if (buttonId === 'default') {
-                    activateLicense();
-                }
-            });
-        }
-
-        // Activation de la licence
-        function activateLicense() {
-            const userId = tg.initDataUnsafe?.user?.id || 'demo_user';
-            
-            // Sauvegarder la licence
-            localStorage.setItem('sendermail_license', `premium_${userId}`);
-            
-            hasLicense = true;
-            
-            // Animation de succès
-            tg.HapticFeedback.notificationOccurred('success');
-            
-            // Afficher le message de confirmation
-            tg.showPopup({
-                title: '🎉 Licence Activée !',
-                message: 'Félicitations ! Votre licence Sender Mail Pro est maintenant active. L\'API SpoofWave est débloquée !',
-                buttons: [{ type: 'ok', text: 'Commencer !' }]
-            }, () => {
-                showMainApp();
-                
-                // Envoyer confirmation au bot
-                sendLicenseActivation();
-            });
-        }
-
-        // Navigation entre les pages (si premium)
+        // Navigation entre les pages
         function showPage(pageId) {
-            if (!hasLicense) return;
-            
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
@@ -1431,37 +1031,21 @@ L'équipe`
             tg.HapticFeedback.impactOccurred('light');
         }
 
-        // Envoi des données premium au bot
-        function sendPremiumData() {
+        // Sauvegarder les données de session
+        function saveSessionData() {
             const data = {
-                action: 'premium_data_save',
-                license_status: 'premium',
-                features_unlocked: [
-                    'spoofwave_api',
-                    'unlimited_emails',
-                    'premium_templates', 
-                    'advanced_stats',
-                    'priority_support',
-                    'api_integration'
-                ],
+                action: 'save_session',
                 user_stats: userStats,
+                app_usage: {
+                    last_used: Date.now(),
+                    features_used: ['compose', 'templates', 'dashboard'],
+                    emails_sent: userStats.totalEmails
+                },
                 timestamp: Date.now()
             };
 
             tg.sendData(JSON.stringify(data));
-            tg.showAlert('💎 Données Premium sauvegardées !');
-        }
-
-        // Envoi de confirmation d'activation de licence
-        function sendLicenseActivation() {
-            const data = {
-                action: 'license_activated',
-                license_type: 'premium_lifetime',
-                payment_method: selectedCrypto || 'demo',
-                activation_time: Date.now()
-            };
-
-            tg.sendData(JSON.stringify(data));
+            tg.showAlert('💾 Session sauvegardée !');
         }
 
         // Initialisation
